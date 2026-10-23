@@ -74,6 +74,18 @@ export default function Credentials() {
       tags: ["Software Engineering", "OOP", "Database Design", "MAJU"],
     },
     {
+      id: "aptech-diploma",
+      title: "Advanced Diploma in Software Engineering",
+      issuer: "Aptech Computer Education",
+      date: "December 2022",
+      grade: "Grade: Credit",
+      description:
+        "Comprehensive 3-year professional engineering diploma covering C#, .NET, Java, Object-Oriented Analysis, SQL Server, and Enterprise Web Development.",
+      badge: "Professional Diploma",
+      image: "/credentials/aptech-advanced-diploma-software-engineering.jpg",
+      tags: ["C# & .NET", "Java", "SQL Server", "OOP", "Aptech"],
+    },
+    {
       id: "10pearls-cert",
       title: "10Pearls Shine Internship — Data Sciences",
       issuer: "10Pearls (Pvt) Ltd.",
@@ -114,13 +126,6 @@ export default function Credentials() {
       tags: ["Distributed Ledgers", "Smart Contracts", "Cryptography"],
     },
     {
-      title: "Diploma in Software Engineering (ACCP)",
-      issuer: "Aptech Computer Education",
-      year: "2019 – 2022",
-      status: "Completed (3-Year)",
-      tags: ["C#", ".NET", "Java", "SQL Server", "Web Fundamentals"],
-    },
-    {
       title: "Flutter & Dart Mobile Developer",
       issuer: "Udemy",
       status: "Certified",
@@ -156,8 +161,8 @@ export default function Credentials() {
         </p>
       </div>
 
-      {/* Featured Verified Credentials */}
-      <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
+      {/* Featured Verified Credentials (3-column responsive grid) */}
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {documentCredentials.map((cred) => (
           <div
             key={cred.id}
@@ -166,7 +171,7 @@ export default function Credentials() {
             <div>
               {/* Image Preview with on-site modal trigger */}
               <div
-                className="relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800"
+                className="relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800"
                 onClick={() => openDocumentModal(cred)}
               >
                 <Image
@@ -174,13 +179,13 @@ export default function Credentials() {
                   alt={cred.title}
                   fill
                   className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   priority
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="flex items-center gap-2 rounded-full bg-black/80 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-sm border border-neutral-700">
+                  <span className="flex items-center gap-2 rounded-full bg-black/80 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-sm border border-neutral-700">
                     <Eye className="size-4 text-emerald-400" />
-                    View Full Document On Site
+                    View Full Document
                   </span>
                 </div>
                 <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-emerald-950/80 px-3 py-1 text-xs font-semibold text-emerald-400 border border-emerald-800 backdrop-blur-sm">
@@ -191,29 +196,27 @@ export default function Credentials() {
 
               {/* Document Details */}
               <div className="mt-6">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-xl font-bold text-white md:text-2xl">
-                    {cred.title}
-                  </h3>
-                </div>
+                <h3 className="text-lg font-bold text-white md:text-xl">
+                  {cred.title}
+                </h3>
 
-                <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-neutral-400">
+                <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-neutral-400">
                   <span className="flex items-center gap-1.5 font-medium text-neutral-300">
-                    <Building className="size-4 text-blue-400" />
+                    <Building className="size-3.5 text-blue-400" />
                     {cred.issuer}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="size-4 text-neutral-500" />
+                    <Calendar className="size-3.5 text-neutral-500" />
                     {cred.date}
                   </span>
                   {cred.grade && (
-                    <span className="rounded-md bg-neutral-800 px-2.5 py-0.5 text-xs font-semibold text-neutral-200">
+                    <span className="rounded-md bg-neutral-800 px-2 py-0.5 text-xs font-semibold text-neutral-200">
                       {cred.grade}
                     </span>
                   )}
                 </div>
 
-                <p className="mt-4 text-base leading-relaxed text-[#888]">
+                <p className="mt-4 text-sm leading-relaxed text-[#888]">
                   {cred.description}
                 </p>
               </div>
@@ -221,12 +224,12 @@ export default function Credentials() {
 
             {/* Tags & On-Site Action */}
             <div className="mt-6 pt-4 border-t border-neutral-900">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-wrap gap-2">
-                  {cred.tags.map((tag, idx) => (
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-wrap gap-1.5">
+                  {cred.tags.slice(0, 3).map((tag, idx) => (
                     <span
                       key={idx}
-                      className="rounded-full bg-neutral-900 px-3 py-1 text-xs font-medium text-neutral-400"
+                      className="rounded-full bg-neutral-900 px-2.5 py-0.5 text-[11px] font-medium text-neutral-400"
                     >
                       {tag}
                     </span>
@@ -236,9 +239,9 @@ export default function Credentials() {
                 <button
                   type="button"
                   onClick={() => openDocumentModal(cred)}
-                  className="flex items-center gap-1.5 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                  View Full Document <Maximize2 className="size-3.5" />
+                  View Document <Maximize2 className="size-3" />
                 </button>
               </div>
             </div>
