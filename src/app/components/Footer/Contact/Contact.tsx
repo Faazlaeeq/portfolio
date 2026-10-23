@@ -118,8 +118,6 @@ export default function ContactDetails() {
       <p className="pb-10 pt-[100px] text-center text-[#8a95ad]">
         Copyright &copy; {date}{" "}
         <GradientTxt tagName="span" txt="<FaazDotDev/>." /> all rights reserved.
-        Built using NextJS, Typescript, TailwindCSS, Framer motion, Sanity and
-        NodeJS.
       </p>
     </section>
   );

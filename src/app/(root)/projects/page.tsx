@@ -59,7 +59,7 @@ export default async function Projects() {
                   <div className="flex flex-wrap justify-between">
                     <GradientTxt
                       tagName="h6"
-                      txt={project.tagline}
+                      txt={project.slug === "jewelery-register" ? "Custom Gold Refining Lab Software" : project.tagline}
                       className="text-[13px] font-bold tracking-[4px] md:text-sm xl:text-lg"
                     />
                     <div className="flex flex-wrap gap-4 justify-end">

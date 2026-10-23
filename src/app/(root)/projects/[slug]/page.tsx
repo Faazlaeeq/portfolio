@@ -143,6 +143,14 @@ export default async function ProjectDetails({ params }: Params) {
     toast.error("Error fetching project details, please try again later!");
 
 
+  const isJewelery = params.slug === "jewelery-register";
+  const displayTagline = isJewelery
+    ? "Custom Gold Refining Lab Software"
+    : project.tagline;
+  const displayDescription = isJewelery
+    ? "A custom desktop software engineered specifically for a local gold refining lab tailored to their specialized workflow, refining batch tracking, purity calculations, and inventory accounting (C#, .NET, WPF, MS SQL Server)."
+    : project.description;
+
   return (
     <section>
       <div className="container mx-auto px-5 pt-5 lg:px-20">
@@ -151,7 +159,7 @@ export default async function ProjectDetails({ params }: Params) {
 
             <GradientTxt
               tagName="h6"
-              txt={project.tagline}
+              txt={displayTagline}
               className="text-sm font-bold"
             />
             <h2 className="mt-3 text-[36px] font-bold leading-[120%] md:text-[50px] xl:text-[54px]">
@@ -179,7 +187,7 @@ export default async function ProjectDetails({ params }: Params) {
             <h4 className="mb-3 text-[19px] font-bold leading-[110%] md:text-2xl">
               Project Overview
             </h4>
-            <p className="md:text-lg">{project.description}</p>
+            <p className="md:text-lg">{displayDescription}</p>
           </div>
         </div>
         <div className="relative group">

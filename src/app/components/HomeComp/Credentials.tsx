@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import GradientTxt from "../Reusables/GradientTxt";
 import {
@@ -12,6 +12,9 @@ import {
   Calendar,
   Eye,
   ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+  Film,
 } from "lucide-react";
 
 interface DocumentCredential {
@@ -37,6 +40,7 @@ interface AdditionalCertification {
 }
 
 export default function Credentials() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [activeModal, setActiveModal] = useState<{
     id: string;
     title: string;
@@ -46,22 +50,7 @@ export default function Credentials() {
     verificationUrl?: string;
   } | null>(null);
 
-  // Close modal on Escape key press and prevent background scrolling
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActiveModal(null);
-      }
-    };
-    if (activeModal) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "auto";
-    };
-  }, [activeModal]);
+  const filmstripRef = useRef<HTMLDivElement>(null);
 
   const documentCredentials: DocumentCredential[] = [
     {
@@ -71,7 +60,7 @@ export default function Credentials() {
       date: "October 2024",
       grade: "CGPA 3.88",
       description:
-        "Official 2-year university degree covering Object-Oriented Programming, Data Structures & Algorithms, Relational Databases, and Full-Stack Software Engineering.",
+        "Official 2-year university degree covering Object-Oriented Programming, Data Structures & Algorithms, Relational Database Design, and Full-Stack Software Engineering.",
       badge: "Official Degree",
       image: "/credentials/maju-associate-degree-software-development.jpg",
       tags: ["Software Engineering", "OOP", "Database Design", "MAJU"],
@@ -95,7 +84,7 @@ export default function Credentials() {
       date: "June 2026",
       grade: "Verified Completion",
       description:
-        "Official credential verifying hands-on competence in AWS Artificial Intelligence and cloud fundamentals, generative AI architectures, and applied machine learning.",
+        "Official credential verifying hands-on competence in AWS Artificial Intelligence, cloud fundamentals, generative AI architectures, and applied machine learning.",
       badge: "Cloud & AI Verified",
       image: "/credentials/udacity-aws-ai-practitioner-certificate.png",
       pdfUrl: "/credentials/udacity-aws-ai-practitioner-certificate.pdf",
@@ -108,7 +97,7 @@ export default function Credentials() {
       title: "SQL (Intermediate) Certificate",
       issuer: "HackerRank",
       date: "February 2024",
-      grade: "Certificate ID: 78202DE73353",
+      grade: "Cert ID: 78202DE73353",
       description:
         "Standardized skills assessment certifying proficiency in writing complex SQL queries, multi-table joins, subqueries, aggregations, and performance-tuned filtering.",
       badge: "Technical Skill Verified",
@@ -172,6 +161,45 @@ export default function Credentials() {
     },
   ];
 
+  // Close modal on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveModal(null);
+      } else if (!activeModal) {
+        if (e.key === "ArrowLeft") {
+          setCurrentSlide((prev) =>
+            prev === 0 ? documentCredentials.length - 1 : prev - 1
+          );
+        } else if (e.key === "ArrowRight") {
+          setCurrentSlide((prev) =>
+            prev === documentCredentials.length - 1 ? 0 : prev + 1
+          );
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    if (activeModal) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "auto";
+    };
+  }, [activeModal, documentCredentials.length]);
+
+  const activeCred = documentCredentials[currentSlide];
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % documentCredentials.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentSlide(
+      (prev) => (prev - 1 + documentCredentials.length) % documentCredentials.length
+    );
+  };
+
   const openDocumentModal = (cred: DocumentCredential) => {
     setActiveModal({
       id: cred.id,
@@ -192,114 +220,199 @@ export default function Credentials() {
           txt="CREDENTIALS & DEGREES"
           className="mb-4 text-[22px] font-bold tracking-[4px]"
         />
-        <h2 className="mb-4 text-[36px] font-bold leading-[110%] tracking-[0.5px] md:text-[50px] xl:text-[54px]">
-          Verified Degrees & Certifications
-        </h2>
-        <p className="max-w-[700px] text-[18px] text-[#888] md:text-[20px]">
-          Formal academic degrees, industry certifications, and technical accreditations
-          validating my software engineering, mobile development, cloud AI, and database expertise.
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h2 className="text-[36px] font-bold leading-[110%] tracking-[0.5px] md:text-[50px] xl:text-[54px]">
+            Verified Degrees & Certifications
+          </h2>
+
+          {/* Slide Navigation Controls */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-semibold tracking-widest text-neutral-400">
+              {String(currentSlide + 1).padStart(2, "0")} /{" "}
+              {String(documentCredentials.length).padStart(2, "0")}
+            </span>
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="flex size-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 transition-colors hover:border-neutral-600 hover:bg-neutral-800 hover:text-white"
+              aria-label="Previous credential"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="flex size-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 transition-colors hover:border-neutral-600 hover:bg-neutral-800 hover:text-white"
+              aria-label="Next credential"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+          </div>
+        </div>
+
+        <p className="mt-3 max-w-[700px] text-[18px] text-[#888] md:text-[20px]">
+          Formal academic degrees, industry certifications, and verified credentials
+          validating my software engineering, cloud AI, and database expertise.
         </p>
       </div>
 
-      {/* Featured Verified Credentials (6 Cards, 2 rows of 3) */}
-      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {documentCredentials.map((cred) => (
+      {/* Featured Active Slideshow Display Card */}
+      <div className="mt-10 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-950 p-6 md:p-10 shadow-2xl transition-all duration-300">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+          {/* Certificate Visual Preview */}
           <div
-            key={cred.id}
-            className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-6 transition-all duration-300 hover:border-neutral-600 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+            className="group relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 lg:col-span-7"
+            onClick={() => openDocumentModal(activeCred)}
           >
-            <div>
-              {/* Image Preview with on-site modal trigger */}
-              <div
-                className="relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800"
-                onClick={() => openDocumentModal(cred)}
-              >
-                <Image
-                  src={cred.image}
-                  alt={cred.title}
-                  fill
-                  className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="flex items-center gap-2 rounded-full bg-black/80 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-sm border border-neutral-700">
-                    <Eye className="size-4 text-emerald-400" />
-                    View Full Document
-                  </span>
-                </div>
-                <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-emerald-950/80 px-3 py-1 text-xs font-semibold text-emerald-400 border border-emerald-800 backdrop-blur-sm">
-                  <CheckCircle2 className="size-3.5" />
-                  {cred.badge}
-                </div>
-              </div>
-
-              {/* Document Details */}
-              <div className="mt-6">
-                <h3 className="text-lg font-bold text-white md:text-xl">
-                  {cred.title}
-                </h3>
-
-                <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-neutral-400">
-                  <span className="flex items-center gap-1.5 font-medium text-neutral-300">
-                    <Building className="size-3.5 text-blue-400" />
-                    {cred.issuer}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="size-3.5 text-neutral-500" />
-                    {cred.date}
-                  </span>
-                  {cred.grade && (
-                    <span className="rounded-md bg-neutral-800 px-2 py-0.5 text-xs font-semibold text-neutral-200">
-                      {cred.grade}
-                    </span>
-                  )}
-                </div>
-
-                <p className="mt-4 text-sm leading-relaxed text-[#888]">
-                  {cred.description}
-                </p>
-              </div>
+            <Image
+              src={activeCred.image}
+              alt={activeCred.title}
+              fill
+              className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              priority
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <span className="flex items-center gap-2 rounded-full bg-black/80 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-sm border border-neutral-700">
+                <Eye className="size-4 text-emerald-400" />
+                View Full Document On Site
+              </span>
             </div>
-
-            {/* Tags & Actions */}
-            <div className="mt-6 pt-4 border-t border-neutral-900">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex flex-wrap gap-1.5">
-                  {cred.tags.slice(0, 3).map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="rounded-full bg-neutral-900 px-2.5 py-0.5 text-[11px] font-medium text-neutral-400"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-3">
-                  {cred.verificationUrl && (
-                    <a
-                      href={cred.verificationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
-                      title="Verify authenticity online"
-                    >
-                      Verify <ExternalLink className="size-3" />
-                    </a>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => openDocumentModal(cred)}
-                    className="flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    View Document <Maximize2 className="size-3" />
-                  </button>
-                </div>
-              </div>
+            <div className="absolute top-4 left-4 flex items-center gap-1.5 rounded-full bg-emerald-950/80 px-3 py-1 text-xs font-semibold text-emerald-400 border border-emerald-800 backdrop-blur-sm">
+              <CheckCircle2 className="size-3.5" />
+              {activeCred.badge}
             </div>
           </div>
-        ))}
+
+          {/* Certificate Information Panel */}
+          <div className="flex flex-col justify-between lg:col-span-5">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-neutral-900 px-3 py-1 text-xs font-semibold text-neutral-300 border border-neutral-800">
+                  Credential {currentSlide + 1} of {documentCredentials.length}
+                </span>
+                {activeCred.grade && (
+                  <span className="rounded-md bg-blue-950/60 px-2.5 py-1 text-xs font-semibold text-blue-300 border border-blue-900/50">
+                    {activeCred.grade}
+                  </span>
+                )}
+              </div>
+
+              <h3 className="mt-4 text-2xl font-bold text-white md:text-3xl">
+                {activeCred.title}
+              </h3>
+
+              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-neutral-400">
+                <span className="flex items-center gap-1.5 font-medium text-neutral-200">
+                  <Building className="size-4 text-blue-400" />
+                  {activeCred.issuer}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="size-4 text-neutral-500" />
+                  {activeCred.date}
+                </span>
+              </div>
+
+              <p className="mt-5 text-base leading-relaxed text-[#999]">
+                {activeCred.description}
+              </p>
+
+              {/* Tags */}
+              <div className="mt-6 flex flex-wrap gap-2">
+                {activeCred.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="rounded-full bg-neutral-900 px-3 py-1 text-xs font-medium text-neutral-400 border border-neutral-800/60"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="mt-8 flex flex-wrap items-center gap-4 border-t border-neutral-900 pt-6">
+              <button
+                type="button"
+                onClick={() => openDocumentModal(activeCred)}
+                className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors shadow-lg shadow-blue-600/20"
+              >
+                <Maximize2 className="size-4" />
+                View Full Document
+              </button>
+
+              {activeCred.verificationUrl && (
+                <a
+                  href={activeCred.verificationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 rounded-xl border border-neutral-800 bg-neutral-900 hover:border-neutral-700 hover:bg-neutral-800 px-4 py-2.5 text-sm font-semibold text-emerald-400 transition-colors"
+                >
+                  Verify Online <ExternalLink className="size-3.5" />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Film Strip of All Thumbnails */}
+      <div className="mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="flex items-center gap-2 text-xs font-semibold tracking-wider text-neutral-400 uppercase">
+            <Film className="size-4 text-blue-400" />
+            Credentials Film Strip — Click Any to Inspect
+          </span>
+          <span className="text-xs text-neutral-500">
+            Use arrow keys or click thumbnail
+          </span>
+        </div>
+
+        <div
+          ref={filmstripRef}
+          className="flex gap-4 overflow-x-auto pb-4 pt-2 scrollbar-thin scrollbar-thumb-neutral-800"
+        >
+          {documentCredentials.map((cred, index) => {
+            const isActive = index === currentSlide;
+            return (
+              <div
+                key={cred.id}
+                onClick={() => setCurrentSlide(index)}
+                className={`group relative flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 ${
+                  isActive
+                    ? "w-[240px] border-blue-500 bg-neutral-900 shadow-[0_0_25px_rgba(59,130,246,0.25)] ring-2 ring-blue-500/50"
+                    : "w-[180px] border-neutral-800/80 bg-neutral-950 opacity-60 hover:border-neutral-700 hover:opacity-100"
+                }`}
+              >
+                {/* Filmstrip Thumbnail Image */}
+                <div className="relative aspect-[16/10] w-full bg-neutral-900">
+                  <Image
+                    src={cred.image}
+                    alt={cred.title}
+                    fill
+                    className="object-contain p-2"
+                    sizes="240px"
+                  />
+                  {isActive && (
+                    <div className="absolute top-2 left-2 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-bold text-white shadow">
+                      Active
+                    </div>
+                  )}
+                </div>
+
+                {/* Filmstrip Caption */}
+                <div className="p-3">
+                  <h4 className="truncate text-xs font-bold text-neutral-200">
+                    {cred.title}
+                  </h4>
+                  <p className="mt-1 truncate text-[11px] text-neutral-500">
+                    {cred.issuer}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Additional Professional Certifications Grid */}
@@ -316,11 +429,9 @@ export default function Credentials() {
               className="flex flex-col justify-between rounded-xl border border-neutral-800/80 bg-neutral-950 p-5 transition-all duration-200 hover:border-neutral-700"
             >
               <div>
-                <div className="flex items-start justify-between gap-2">
-                  <h4 className="text-base font-bold text-neutral-100">
-                    {cert.title}
-                  </h4>
-                </div>
+                <h4 className="text-base font-bold text-neutral-100">
+                  {cert.title}
+                </h4>
 
                 <div className="mt-2 flex items-center gap-2 text-xs text-neutral-400">
                   <span className="font-medium text-neutral-300">{cert.issuer}</span>
@@ -378,7 +489,7 @@ export default function Credentials() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 rounded-lg bg-emerald-950/80 border border-emerald-800 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900 transition-colors"
                   >
-                    Verify Authenticity <ExternalLink className="size-3" />
+                    Verify Online <ExternalLink className="size-3" />
                   </a>
                 )}
                 <button

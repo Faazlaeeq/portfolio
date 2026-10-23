@@ -95,7 +95,7 @@ export default function AnimatedSlide({
                     tagName="h5"
                   />
                   <h4 className="my-6 truncate text-[19px] font-bold leading-[110%] transition-opacity duration-300 group-hover:opacity-50">
-                    {project.tagline}
+                    {project.slug === "jewelery-register" ? "Custom Gold Refining Lab Software" : project.tagline}
                   </h4>
                   <CustomNav
                     txt="View Project"

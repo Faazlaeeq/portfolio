@@ -90,7 +90,7 @@ export default function ClientContact() {
             <span>faazlaeeq@gmail.com</span>
           </Link>
           <Link
-            href="tel:+2347089111679"
+            href="tel:+923194101878"
             className="mb-8 flex items-center gap-2 text-xl font-bold text-[#5c5c5c]"
           >
             <svg

@@ -15,19 +15,38 @@ const marqueeVariants = {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 30,
+        duration: 35,
         ease: "linear",
       },
     },
   },
 };
 
+const DEFAULT_STACK: string[] = [
+  "Agentic AI (CrewAI)",
+  "AWS Bedrock & Lambda",
+  "Python (FastAPI)",
+  "Node.js & Express",
+  "TypeScript",
+  "LangChain & RAG",
+  "C# & .NET Core",
+  "MS SQL Server",
+  "Next.js & React",
+  "Docker & CI/CD",
+  "Flutter & Dart",
+  "Hopsworks Feature Store",
+];
+
 export default function TechStacks({
   initialTechStacks = [],
 }: {
   initialTechStacks?: Technology[];
 }) {
-  const [techStacks, setTechStacks] = useState<Technology[]>(initialTechStacks);
+  const [techStacks, setTechStacks] = useState<string[]>(
+    initialTechStacks.length > 0
+      ? Array.from(new Set([...DEFAULT_STACK, ...initialTechStacks.map((t) => t.technology)]))
+      : DEFAULT_STACK
+  );
 
   useEffect(() => {
     if (initialTechStacks && initialTechStacks.length > 0) return;
@@ -35,7 +54,11 @@ export default function TechStacks({
     const getStacks = async function () {
       try {
         const stacks = await getTechStacks();
-        setTechStacks(stacks);
+        if (stacks && stacks.length > 0) {
+          setTechStacks(
+            Array.from(new Set([...DEFAULT_STACK, ...stacks.map((t) => t.technology)]))
+          );
+        }
       } catch (error) {
         toast.error("Failed to fetch tech stacks. Please try again later.");
       }
@@ -48,9 +71,12 @@ export default function TechStacks({
       <FadeUp tag="div" className="mb-16">
         <GradientTxt
           tagName="h6"
-          txt="TECHNOLOGIES I USE"
-          className="mb-4 text-center text-[22px] font-bold"
+          txt="CORE TECH & SKILLS"
+          className="mb-4 text-center text-[22px] font-bold tracking-[4px]"
         />
+        <h2 className="mx-auto max-w-[800px] text-center text-[30px] font-bold leading-[120%] tracking-[0.5px] md:text-[42px]">
+          Tools & architectures I build production software with.
+        </h2>
       </FadeUp>
       <div className="relative mt-10 overflow-hidden">
         <div className="absolute -left-2 z-10 h-full w-[20px] lg:w-[30px] xl:w-[40px]" />
@@ -60,20 +86,20 @@ export default function TechStacks({
           variants={marqueeVariants}
           animate="animate"
         >
-          {techStacks.map((tech) => (
+          {techStacks.map((tech, idx) => (
             <span
-              key={tech._id}
-              className="dancingScript mx-4 text-xl font-bold tracking-[4px] text-gray-600 md:text-2xl"
+              key={`tech-${idx}`}
+              className="dancingScript mx-4 text-xl font-bold tracking-[4px] text-gray-500 hover:text-white transition-colors md:text-2xl"
             >
-              {tech.technology}
+              {tech}
             </span>
           ))}
-          {techStacks.map((tech) => (
+          {techStacks.map((tech, idx) => (
             <span
-              key={`duplicate-${tech._id}`}
-              className="dancingScript mx-4 text-xl font-bold tracking-[4px] text-gray-600 md:text-2xl"
+              key={`duplicate-${idx}`}
+              className="dancingScript mx-4 text-xl font-bold tracking-[4px] text-gray-500 hover:text-white transition-colors md:text-2xl"
             >
-              {tech.technology}
+              {tech}
             </span>
           ))}
         </motion.div>
