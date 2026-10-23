@@ -117,6 +117,20 @@ export default function Credentials() {
       tags: ["T-SQL", "Complex Joins", "Aggregations", "HackerRank"],
     },
     {
+      id: "udemy-flutter",
+      title: "Flutter & Dart - The Complete Guide",
+      issuer: "Udemy (Academind)",
+      date: "February 2025",
+      grade: "30 Total Hours",
+      description:
+        "Comprehensive cross-platform mobile development certification by Maximilian Schwarzmüller covering Dart, Flutter framework, state management (Bloc, Provider), REST APIs, and native device integration.",
+      badge: "Mobile Dev Verified",
+      image: "/credentials/udemy-flutter-dart-certificate.jpg",
+      verificationUrl:
+        "https://ude.my/UC-bb16454e-1959-4ff1-accf-958ea59db2ef",
+      tags: ["Flutter", "Dart", "Cross-Platform", "Bloc & REST"],
+    },
+    {
       id: "10pearls-cert",
       title: "10Pearls Shine Internship — Data Sciences",
       issuer: "10Pearls (Pvt) Ltd.",
@@ -151,10 +165,10 @@ export default function Credentials() {
       tags: ["Distributed Ledgers", "Smart Contracts", "Cryptography"],
     },
     {
-      title: "Flutter & Dart Mobile Developer",
-      issuer: "Udemy",
-      status: "Certified",
-      tags: ["Cross-Platform", "Bloc & GetX", "Firebase", "REST APIs"],
+      title: "SAP Analytics Cloud (SAC) Reporting & Dashboards",
+      issuer: "SAP / Course Certification",
+      status: "Completed Course",
+      tags: ["SAC", "BI Reporting", "KPI Dashboards", "Analytics"],
     },
   ];
 
@@ -183,11 +197,11 @@ export default function Credentials() {
         </h2>
         <p className="max-w-[700px] text-[18px] text-[#888] md:text-[20px]">
           Formal academic degrees, industry certifications, and technical accreditations
-          validating my software engineering, cloud AI, and database expertise.
+          validating my software engineering, mobile development, cloud AI, and database expertise.
         </p>
       </div>
 
-      {/* Featured Verified Credentials (Responsive Grid) */}
+      {/* Featured Verified Credentials (6 Cards, 2 rows of 3) */}
       <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {documentCredentials.map((cred) => (
           <div
@@ -269,7 +283,7 @@ export default function Credentials() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
-                      title="Verify authenticity on Udacity"
+                      title="Verify authenticity online"
                     >
                       Verify <ExternalLink className="size-3" />
                     </a>
@@ -364,7 +378,7 @@ export default function Credentials() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 rounded-lg bg-emerald-950/80 border border-emerald-800 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900 transition-colors"
                   >
-                    Verify on Udacity <ExternalLink className="size-3" />
+                    Verify Authenticity <ExternalLink className="size-3" />
                   </a>
                 )}
                 <button
