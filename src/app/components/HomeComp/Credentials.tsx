@@ -11,6 +11,7 @@ import {
   Building,
   Calendar,
   Eye,
+  ExternalLink,
 } from "lucide-react";
 
 interface DocumentCredential {
@@ -23,6 +24,7 @@ interface DocumentCredential {
   badge: string;
   image: string;
   pdfUrl?: string;
+  verificationUrl?: string;
   tags: string[];
 }
 
@@ -41,6 +43,7 @@ export default function Credentials() {
     issuer: string;
     image: string;
     pdfUrl?: string;
+    verificationUrl?: string;
   } | null>(null);
 
   // Close modal on Escape key press and prevent background scrolling
@@ -86,6 +89,34 @@ export default function Credentials() {
       tags: ["C# & .NET", "Java", "SQL Server", "OOP", "Aptech"],
     },
     {
+      id: "udacity-aws-ai",
+      title: "AWS AI Practitioner Challenge",
+      issuer: "Udacity (Part of Accenture)",
+      date: "June 2026",
+      grade: "Verified Completion",
+      description:
+        "Official credential verifying hands-on competence in AWS Artificial Intelligence and cloud fundamentals, generative AI architectures, and applied machine learning.",
+      badge: "Cloud & AI Verified",
+      image: "/credentials/udacity-aws-ai-practitioner-certificate.png",
+      pdfUrl: "/credentials/udacity-aws-ai-practitioner-certificate.pdf",
+      verificationUrl:
+        "https://www.udacity.com/certificate/e/9fd0fdf6-340a-11f1-8447-d7f20d8c41a3",
+      tags: ["AWS AI", "Cloud Architecture", "Generative AI", "Udacity"],
+    },
+    {
+      id: "hackerrank-sql",
+      title: "SQL (Intermediate) Certificate",
+      issuer: "HackerRank",
+      date: "February 2024",
+      grade: "Certificate ID: 78202DE73353",
+      description:
+        "Standardized skills assessment certifying proficiency in writing complex SQL queries, multi-table joins, subqueries, aggregations, and performance-tuned filtering.",
+      badge: "Technical Skill Verified",
+      image: "/credentials/hackerrank-sql-intermediate-certificate.png",
+      pdfUrl: "/credentials/hackerrank-sql-intermediate-certificate.pdf",
+      tags: ["T-SQL", "Complex Joins", "Aggregations", "HackerRank"],
+    },
+    {
       id: "10pearls-cert",
       title: "10Pearls Shine Internship — Data Sciences",
       issuer: "10Pearls (Pvt) Ltd.",
@@ -102,19 +133,13 @@ export default function Credentials() {
 
   const additionalCerts: AdditionalCertification[] = [
     {
-      title: "HackerRank SQL Developer (Basic & Intermediate)",
-      issuer: "HackerRank",
-      status: "Certified",
-      tags: ["T-SQL", "Complex Joins", "Aggregations", "Schema Design"],
-    },
-    {
       title: "Multi-Agent Systems with CrewAI",
       issuer: "DeepLearning.AI",
       status: "Certified",
       tags: ["Autonomous Agents", "CrewAI", "LangChain", "LLMs"],
     },
     {
-      title: "AWS Certified AI Agent Developer / Agent Engineer",
+      title: "Future AWS Agent Engineer Nanodegree",
       issuer: "Udacity",
       status: "Nanodegree (In Progress)",
       tags: ["AWS Bedrock", "Lambda", "API Gateway", "S3 Vector Store"],
@@ -140,6 +165,7 @@ export default function Credentials() {
       issuer: cred.issuer,
       image: cred.image,
       pdfUrl: cred.pdfUrl,
+      verificationUrl: cred.verificationUrl,
     });
   };
 
@@ -156,12 +182,12 @@ export default function Credentials() {
           Verified Degrees & Certifications
         </h2>
         <p className="max-w-[700px] text-[18px] text-[#888] md:text-[20px]">
-          Formal academic degrees and industry-recognized certifications
-          validating my software development, data science, and AI systems background.
+          Formal academic degrees, industry certifications, and technical accreditations
+          validating my software engineering, cloud AI, and database expertise.
         </p>
       </div>
 
-      {/* Featured Verified Credentials (3-column responsive grid) */}
+      {/* Featured Verified Credentials (Responsive Grid) */}
       <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {documentCredentials.map((cred) => (
           <div
@@ -222,7 +248,7 @@ export default function Credentials() {
               </div>
             </div>
 
-            {/* Tags & On-Site Action */}
+            {/* Tags & Actions */}
             <div className="mt-6 pt-4 border-t border-neutral-900">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex flex-wrap gap-1.5">
@@ -236,13 +262,26 @@ export default function Credentials() {
                   ))}
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => openDocumentModal(cred)}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  View Document <Maximize2 className="size-3" />
-                </button>
+                <div className="flex items-center gap-3">
+                  {cred.verificationUrl && (
+                    <a
+                      href={cred.verificationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+                      title="Verify authenticity on Udacity"
+                    >
+                      Verify <ExternalLink className="size-3" />
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => openDocumentModal(cred)}
+                    className="flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    View Document <Maximize2 className="size-3" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -253,10 +292,10 @@ export default function Credentials() {
       <div className="mt-16">
         <h3 className="mb-6 flex items-center gap-2 text-2xl font-bold text-white">
           <Award className="size-6 text-yellow-400" />
-          Industry Certifications & Accreditations
+          Additional Certifications & Specializations
         </h3>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {additionalCerts.map((cert, index) => (
             <div
               key={index}
@@ -317,14 +356,26 @@ export default function Credentials() {
                 <p className="text-xs text-neutral-400">{activeModal.issuer}</p>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setActiveModal(null)}
-                className="rounded-full bg-neutral-800 p-2 text-neutral-300 transition-colors hover:bg-neutral-700 hover:text-white"
-                aria-label="Close modal"
-              >
-                <X className="size-5" />
-              </button>
+              <div className="flex items-center gap-3">
+                {activeModal.verificationUrl && (
+                  <a
+                    href={activeModal.verificationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 rounded-lg bg-emerald-950/80 border border-emerald-800 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900 transition-colors"
+                  >
+                    Verify on Udacity <ExternalLink className="size-3" />
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setActiveModal(null)}
+                  className="rounded-full bg-neutral-800 p-2 text-neutral-300 transition-colors hover:bg-neutral-700 hover:text-white"
+                  aria-label="Close modal"
+                >
+                  <X className="size-5" />
+                </button>
+              </div>
             </div>
 
             {/* Modal Document Body - Shown Directly On Site */}
