@@ -50,6 +50,12 @@ export default function Header() {
                 Services
               </Link>
               <Link
+                href="/#credentials"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
+              >
+                Credentials
+              </Link>
+              <Link
                 href="/projects"
                 className={`my-5 transition-opacity duration-75 ${pathname.includes("/projects") ? "opacity-50" : "hover:opacity-50"}`}
               >
@@ -113,6 +119,13 @@ export default function Header() {
                 onClick={() => setIsNavClicked(false)}
               >
                 Services
+              </Link>
+              <Link
+                href="/#credentials"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
+                onClick={() => setIsNavClicked(false)}
+              >
+                Credentials
               </Link>
               <Link
                 href="/projects"

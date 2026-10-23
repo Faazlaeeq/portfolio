@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+"use client";
+
 import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
@@ -9,24 +10,21 @@ type Props = {
   to?: string;
 };
 
-export default function FadeUp({ tag, children, className, to }: Props) {
+export default function FadeUp({ tag: Tag, children, className, to }: Props) {
   const router = useRouter();
-  const MotionTag = motion[tag];
 
   const handleNavigation = function () {
-    router.push(to as string);
+    if (to) {
+      router.push(to);
+    }
   };
 
   return (
-    <MotionTag
-      initial={{ y: 100, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1 }}
-      viewport={{ once: true }}
+    <Tag
       className={className}
-      onClick={to ? handleNavigation : () => null}
+      onClick={to ? handleNavigation : undefined}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

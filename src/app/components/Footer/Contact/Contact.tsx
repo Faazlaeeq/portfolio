@@ -17,6 +17,11 @@ export default function ContactDetails() {
     },
 
     {
+      name: "Credentials",
+      path: "/#credentials",
+    },
+
+    {
       name: "Experience",
       path: "/#experience",
     },
@@ -58,12 +63,13 @@ export default function ContactDetails() {
         <h2 className="text-[36px] font-bold tracking-[0.5px] text-white md:text-[50px] xl:text-[54px]">
           Ready to create something amazing?
         </h2>
-        <Link href="/contact" className="text-white"> <GradientTxt
-          tagName="h4"
-          txt="Let's hop on a call."
-
-          className="call sharedStyles cursor-pointer text-[30px] font-bold tracking-[0.5px] md:text-[50px] xl:text-[54px]"
-        /></Link>
+        <Link href="/contact" className="text-white">
+          <GradientTxt
+            tagName="h4"
+            txt="Let's hop on a call."
+            className="call sharedStyles cursor-pointer text-[30px] font-bold tracking-[0.5px] md:text-[50px] xl:text-[54px]"
+          />
+        </Link>
       </FadeUp>
 
       <div className="flex flex-col xl:flex-row xl:justify-between">

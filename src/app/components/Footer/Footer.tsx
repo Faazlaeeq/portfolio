@@ -2,8 +2,13 @@ import FadeUp from "@/animations/FadeUp";
 import GradientTxt from "../Reusables/GradientTxt";
 import ContactDetails from "./Contact/Contact";
 import FAQ from "./FAQ/FAQ";
+import type { FAQ as FAQType } from "../../../types/FAQ";
 
-export default function Footer() {
+export default function Footer({
+  initialFaqs,
+}: {
+  initialFaqs?: FAQType[];
+}) {
   return (
     <footer className="mt-[80px] bg-black">
       <div className="container mx-auto px-5 pt-5 lg:px-20">
@@ -18,7 +23,7 @@ export default function Footer() {
           </h4>
         </FadeUp>
 
-        <FAQ />
+        <FAQ initialFaqs={initialFaqs} />
         <ContactDetails />
       </div>
     </footer>

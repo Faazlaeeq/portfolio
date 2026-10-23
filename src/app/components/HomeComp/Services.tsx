@@ -8,10 +8,16 @@ import type { Services } from "../../../../types/Services";
 import { getServices } from "../../../../sanity/sanity-utils";
 import { toast } from "react-toastify";
 
-export default function Services() {
-  const [services, setServices] = useState<Services[]>([]);
+export default function Services({
+  initialServices = [],
+}: {
+  initialServices?: Services[];
+}) {
+  const [services, setServices] = useState<Services[]>(initialServices);
 
   useEffect(() => {
+    if (initialServices && initialServices.length > 0) return;
+
     const fetchServices = async function () {
       try {
         const services = await getServices();
@@ -23,7 +29,7 @@ export default function Services() {
     };
 
     fetchServices();
-  }, []);
+  }, [initialServices]);
 
   return (
     <section id="services" className="mb-[80px]">
@@ -48,7 +54,7 @@ export default function Services() {
               width={70}
               height={70}
               src={service.icon}
-              alt={service.alt}
+              alt={service.alt || service.title || "service icon"}
               priority
             />
             <h6 className="my-4 mb-6 text-[19px] font-bold leading-[110%] lg:mt-10">
@@ -58,7 +64,7 @@ export default function Services() {
               {service.description}
             </p>
             <ul className="inline-flex flex-col gap-3 pl-5 md:pl-0">
-              {service.lists.map((list, i) => (
+              {service.lists?.map((list, i) => (
                 <li key={i} className="list-disc font-bold">
                   {list}
                 </li>

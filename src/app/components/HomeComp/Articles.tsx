@@ -9,19 +9,29 @@ import { getArticles } from "../../../../sanity/sanity-utils";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-export default function Articles() {
+export default function Articles({
+  initialArticles = [],
+}: {
+  initialArticles?: ArticleProps[];
+}) {
   const router = useRouter();
   const [isBottom, setIsBottom] = useState(false);
-  const [articles, setArticles] = useState<ArticleProps[]>([]);
+  const [articles, setArticles] = useState<ArticleProps[]>(initialArticles);
 
-  const fetchArticles = async function () {
-    try {
-      const articles = await getArticles();
-      setArticles(articles);
-    } catch (error) {
-      toast.error("Failed to fetch articles. Please try again later.");
-    }
-  };
+  useEffect(() => {
+    if (initialArticles && initialArticles.length > 0) return;
+
+    const fetchArticles = async function () {
+      try {
+        const articles = await getArticles();
+        setArticles(articles);
+      } catch (error) {
+        toast.error("Failed to fetch articles. Please try again later.");
+      }
+    };
+
+    fetchArticles();
+  }, [initialArticles]);
 
   useEffect(() => {
     const rightContent = document.getElementById("right-content");
@@ -29,7 +39,6 @@ export default function Articles() {
     const handleScroll = function () {
       if (rightContent) {
         const { scrollTop, scrollHeight, clientHeight } = rightContent;
-        console.log(scrollTop, scrollHeight, clientHeight, "asdfs");
         if (scrollTop + clientHeight >= scrollHeight) {
           setIsBottom(true);
         } else {
@@ -41,8 +50,6 @@ export default function Articles() {
     if (rightContent) {
       rightContent.addEventListener("scroll", handleScroll);
     }
-
-    fetchArticles(); // fetch articles
 
     return () => {
       if (rightContent) {

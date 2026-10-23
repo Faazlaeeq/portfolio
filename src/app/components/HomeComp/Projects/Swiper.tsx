@@ -13,14 +13,19 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { getProjects } from "../../../../../sanity/sanity-utils";
 import { toast } from "react-toastify";
 
-export default function AnimatedSlide() {
+export default function AnimatedSlide({
+  initialProjects = [],
+}: {
+  initialProjects?: Project[];
+}) {
   const router = useRouter();
   const swiperRef = useRef<SwiperType | null>(null);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
 
   useEffect(() => {
-    //? fetch projects
-    const fetch = async function () {
+    if (initialProjects && initialProjects.length > 0) return;
+
+    const fetchProjects = async function () {
       try {
         const projects = await getProjects();
         setProjects(projects);
@@ -29,8 +34,8 @@ export default function AnimatedSlide() {
       }
     };
 
-    fetch();
-  }, []);
+    fetchProjects();
+  }, [initialProjects]);
 
   const handleNavigation = function (slug: string) {
     router.push(`/projects/${slug}`);
@@ -72,14 +77,16 @@ export default function AnimatedSlide() {
                 onClick={() => handleNavigation(project.slug)}
               >
                 <div className="w-full overflow-hidden">
-                  <Image
-                    src={project.images[0].url}
-                    alt={project.images[0].alt}
-                    width={400}
-                    height={350}
-                    priority
-                    className="w-full transition-transform duration-300 group-hover:scale-[1.1] md:max-h-[273px]"
-                  />
+                  {project.images && project.images[0] && (
+                    <Image
+                      src={project.images[0].url}
+                      alt={project.images[0].alt || project.title}
+                      width={400}
+                      height={350}
+                      priority
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.1] md:max-h-[273px]"
+                    />
+                  )}
                 </div>
                 <div className="bg-[#0a0a0a] p-10">
                   <GradientTxt

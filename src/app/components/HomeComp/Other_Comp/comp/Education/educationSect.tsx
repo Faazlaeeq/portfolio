@@ -6,11 +6,25 @@ import { Education, Work } from "../../../../../../../types/Experience";
 import { getExperiences } from "../../../../../../../sanity/sanity-utils";
 import { toast } from "react-toastify";
 
-export default function EducationSect() {
-  const [education, setEducation] = useState<Education[]>([]);
-  const [work, setWork] = useState<Work[]>([]);
+export default function EducationSect({
+  initialExperiences,
+}: {
+  initialExperiences?: { education: Education[]; work: Work[] };
+}) {
+  const [education, setEducation] = useState<Education[]>(
+    initialExperiences?.education || [],
+  );
+  const [work, setWork] = useState<Work[]>(initialExperiences?.work || []);
 
   useEffect(() => {
+    if (
+      initialExperiences &&
+      (initialExperiences.education.length > 0 ||
+        initialExperiences.work.length > 0)
+    ) {
+      return;
+    }
+
     const getProperties = async function () {
       try {
         const { education, work } = await getExperiences();
@@ -22,7 +36,7 @@ export default function EducationSect() {
     };
 
     getProperties();
-  }, []);
+  }, [initialExperiences]);
 
   return (
     <section
@@ -49,19 +63,19 @@ export default function EducationSect() {
 
       <div className="xl:w-1/2">
         <div className="mb-10 text-[27px] font-bold md:text-[36px]">
-          💼  Work Experience
+          💼 Work Experience
         </div>
 
         <div className="flex flex-col gap-10">
-          {work.map((work) => (
+          {work.map((w) => (
             <EduSect
-              key={work._id}
-              type={work.type}
-              name={work.title}
-              title={work.description}
-              date={work.year}
-              img={work.icon}
-              alt={work.alt}
+              key={w._id}
+              type={w.type}
+              name={w.title}
+              title={w.description}
+              date={w.year}
+              img={w.icon}
+              alt={w.alt}
             />
           ))}
         </div>

@@ -4,19 +4,12 @@ import CustomBtn from "./Reusables/CustomBtn";
 import GradientTxt from "./Reusables/GradientTxt";
 import profImg from "../../../public/me with border circle.png";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function Hero() {
-  const MotionImage = motion(Image);
-
   return (
     <section className="my-[80px] items-center gap-16 xl:flex">
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div>
         <h1 className="mb-4 text-[40px] font-bold leading-[110%] md:text-[68px] lg:text-[70px]">
           <GradientTxt tagName="span" txt="I develop fullstack" /> solutions
           that delight and inspire users.
@@ -51,12 +44,9 @@ export default function Hero() {
             </svg>
           </Link>
         </div>
-      </motion.div>
+      </div>
 
-      <MotionImage
-        initial={{ scale: 1.2 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5 }}
+      <Image
         src={profImg}
         alt="profile image"
         className="mx-auto w-full rounded-full lg:w-[500px]"

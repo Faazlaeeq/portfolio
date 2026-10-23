@@ -2,7 +2,6 @@
 
 import quoteImg from "../../../../../../public/quote.svg";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import GradientTxt from "../../../Reusables/GradientTxt";
 import FadeUp from "@/animations/FadeUp";
@@ -10,11 +9,17 @@ import type { Testimonials } from "../../../../../../types/Testimonials";
 import { getTestimonials } from "../../../../../../sanity/sanity-utils";
 import { toast } from "react-toastify";
 
-export default function Testimonials() {
+export default function Testimonials({
+  initialTestimonials = [],
+}: {
+  initialTestimonials?: Testimonials[];
+}) {
   const [current, setCurrent] = useState(0);
-  const [testimonials, setTestimonials] = useState<Testimonials[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonials[]>(initialTestimonials);
 
   useEffect(() => {
+    if (initialTestimonials && initialTestimonials.length > 0) return;
+
     const fetchData = async function () {
       try {
         const testimonials = await getTestimonials();
@@ -24,22 +29,18 @@ export default function Testimonials() {
       }
     };
     fetchData();
-  }, []);
+  }, [initialTestimonials]);
 
   const handleNext = () => {
+    if (testimonials.length === 0) return;
     setCurrent((prev) => (prev + 1) % testimonials.length);
   };
 
   const handlePrev = () => {
+    if (testimonials.length === 0) return;
     setCurrent(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
-  };
-
-  const variants = {
-    enter: { opacity: 0 },
-    center: { opacity: 1 },
-    exit: { opacity: 0 },
   };
 
   return (
@@ -57,48 +58,42 @@ export default function Testimonials() {
 
       {/* animation container */}
       <div className="relative mt-10 flex max-w-full flex-col items-center justify-center xl:h-[500px] xl:flex-row">
-        {testimonials.length && (
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              key={current}
-              className="flex flex-col items-end xl:flex-row xl:gap-[100px]"
-              custom={current}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              variants={variants}
-              transition={{ duration: 0.5 }}
-            >
+        {testimonials.length > 0 && testimonials[current] && (
+          <div
+            key={current}
+            className="flex flex-col items-end xl:flex-row xl:gap-[100px]"
+          >
+            {testimonials[current].image && (
               <Image
                 src={testimonials[current].image}
-                alt={testimonials[current].alt}
+                alt={testimonials[current].alt || "testimonial image"}
                 className="h-[400px] w-full object-cover xl:w-auto"
                 width={485}
                 height={490}
                 priority
               />
+            )}
 
-              <div className="mt-10 xl:mt-0 xl:w-1/2">
-                <Image src={quoteImg} alt="quote svg" priority />
+            <div className="mt-10 xl:mt-0 xl:w-1/2">
+              <Image src={quoteImg} alt="quote svg" priority />
 
-                <div className="mt-4">
-                  <h3
-                    className={`text-[27px] font-bold leading-[130%] ${testimonials[current].message.split(" ").length <= 28 ? "md:text-[36px]" : "md:[30px]"}`}
-                  >
-                    {testimonials[current].message}
-                  </h3>
-                  <div className="mt-10">
-                    <p className="text-[19px] font-bold md:text-[20px]">
-                      {testimonials[current].name}
-                    </p>
-                    <p className="max-w-[200px] text-sm sm:max-w-full md:text-lg">
-                      {testimonials[current].about}
-                    </p>
-                  </div>
+              <div className="mt-4">
+                <h3
+                  className={`text-[27px] font-bold leading-[130%] ${testimonials[current].message.split(" ").length <= 28 ? "md:text-[36px]" : "md:[30px]"}`}
+                >
+                  {testimonials[current].message}
+                </h3>
+                <div className="mt-10">
+                  <p className="text-[19px] font-bold md:text-[20px]">
+                    {testimonials[current].name}
+                  </p>
+                  <p className="max-w-[200px] text-sm sm:max-w-full md:text-lg">
+                    {testimonials[current].about}
+                  </p>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          </div>
         )}
 
         <div className="absolute bottom-0 right-0 ml-auto mt-4 flex h-[60px] w-[80px] items-center justify-between bg-black p-2">
