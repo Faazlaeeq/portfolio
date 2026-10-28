@@ -5,15 +5,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Ahmed Faaz Laeeq | Software Engineer & Agentic AI Specialist",
+    default: "Ahmed Faaz Laeeq | Entry-Level Software Engineer & Agentic AI Specialist",
     template: "%s | Ahmed Faaz Laeeq",
   },
   description:
-    "Portfolio of Ahmed Faaz Laeeq — Software Engineer specializing in scalable backend systems (FastAPI, Node.js, C# .NET, MS SQL Server) and autonomous Agentic AI pipelines (CrewAI, LangChain, AWS Bedrock). AD in Software Development (CGPA 3.88, Magna Cum Laude) & BS in FinTech (CGPA 3.87) from MAJU.",
+    "Portfolio of Ahmed Faaz Laeeq — Software Engineer with Agentic AI expertise, actively seeking entry-level software engineering roles. AD in Software Development (CGPA 3.88, Magna Cum Laude) & BS in FinTech (CGPA 3.87) from MAJU. Verified Future AWS Agent Engineer Nanodegree.",
   keywords: [
     "Ahmed Faaz Laeeq",
     "FaazDotDev",
-    "Software Engineer",
+    "Entry-Level Software Engineer",
+    "Junior Software Engineer",
     "Agentic AI Engineer",
     "Backend Engineer",
     "CrewAI",
@@ -27,9 +28,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Ahmed Faaz Laeeq" }],
   openGraph: {
-    title: "Ahmed Faaz Laeeq | Software Engineer & Agentic AI Specialist",
+    title: "Ahmed Faaz Laeeq | Entry-Level Software Engineer & Agentic AI Specialist",
     description:
-      "Software Engineer specializing in resilient backend architectures and autonomous Agentic AI systems. Actively seeking full-time roles.",
+      "Software Engineer with Agentic AI expertise actively seeking entry-level software engineering roles. AD in Software Development (CGPA 3.88) & BS in FinTech (CGPA 3.87).",
     type: "website",
     locale: "en_US",
   },

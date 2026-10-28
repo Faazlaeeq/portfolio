@@ -70,8 +70,7 @@ export default function ClientContact() {
         <div className="xl:w-[40%]">
           <h2 className="text-[37px] font-bold md:text-[56px]">Get in touch</h2>
           <p className="mb-10 mt-8 text-lg text-[#5c5c5c] md:text-xl">
-            Have a project in mind? Looking to partner or work together? Reach
-            out through the form and I'll get back to you in the next 48 hours.
+            Have an open software engineering role, AI opening, or project? I&apos;m actively seeking entry-level opportunities and would love to connect. Reach out and I&apos;ll get back to you promptly.
           </p>
           <Link
             href="mailto:faazlaeeq@gmail.com"

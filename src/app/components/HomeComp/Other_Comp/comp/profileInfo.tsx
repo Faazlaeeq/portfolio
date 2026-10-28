@@ -12,7 +12,7 @@ export default function ProfileInfo() {
       >
         <div>
           <GradientTxt
-            txt="SOFTWARE ENGINEER & AGENTIC AI"
+            txt="ENTRY-LEVEL SOFTWARE ENGINEER"
             className="text-[22px] font-bold tracking-[4px]"
             tagName="h5"
           />
@@ -21,7 +21,7 @@ export default function ProfileInfo() {
           </h2>
         </div>
         <p className="text-[19px] leading-[40px] text-[#666] md:text-[22px] lg:max-w-[50%]">
-          I am a Software Engineer bridging robust system architecture with autonomous agentic intelligence. With an Associate Degree in Software Development (CGPA 3.88, Magna Cum Laude) and completing my BS in Financial Technology (CGPA 3.87) at MAJU, I bring 4+ years of real-world engineering experience—from developing mobile systems at Rubikkube to shipping 10+ freelance client projects on Upwork with a 5.0 rating. My core dedication is architecting autonomous multi-agent pipelines with CrewAI, LangChain, and AWS Bedrock AgentCore, alongside resilient backend APIs in Python FastAPI, Node.js, and C# .NET.
+          I am an entry-level Software Engineer with specialized hands-on expertise in Autonomous Agentic AI. Graduating with an Associate Degree in Software Development (CGPA 3.88, Magna Cum Laude) and completing my BS in Financial Technology (CGPA 3.87) at MAJU, I pair rigorous academic training with practical delivery—including certified Nanodegree training as a Future AWS Agent Engineer, remote mobile engineering at Rubikkube, and 10+ freelance projects on Upwork with a 5.0 rating. I am actively seeking an entry-level Software Engineer, Associate AI Engineer, or Junior Backend Developer role where I can apply autonomous multi-agent systems (CrewAI, LangChain, AWS Bedrock) and reliable API backends (FastAPI, Node.js, .NET, SQL) to create business impact and grow within an engineering team.
         </p>
       </FadeUp>
     </section>

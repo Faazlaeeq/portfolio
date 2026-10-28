@@ -44,7 +44,7 @@ const SERVICES_DATA: ServiceItem[] = [
     title: "Full-Stack & Cross-Platform Solutions",
     icon: Layers,
     description:
-      "Building high-conversion, accessible web applications and robust mobile systems with seamless state synchronization:",
+      "Building accessible web applications and robust mobile systems with seamless state synchronization:",
     lists: [
       "Modern Web Applications in Next.js 14, React, TypeScript & Tailwind CSS",
       "Cross-platform Mobile Development in Flutter/Dart with Bloc Architecture",
@@ -60,7 +60,7 @@ export default function Services() {
       <FadeUp tag="div" className="mb-16">
         <GradientTxt
           tagName="h6"
-          txt="SERVICES"
+          txt="SKILLS & EXPERTISE"
           className="mb-4 text-center text-[22px] font-bold"
         />
         <h2 className="mx-auto mb-10 max-w-[800px] text-center text-[36px] font-bold leading-[120%] tracking-[0.5px] lg:text-[54px]">

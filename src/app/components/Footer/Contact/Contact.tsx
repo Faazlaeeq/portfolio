@@ -61,12 +61,12 @@ export default function ContactDetails() {
     <section id="contact" className="w-full py-8 lg:py-12">
       <FadeUp tag="div" className="mb-8">
         <h2 className="text-[36px] font-bold tracking-[0.5px] text-white md:text-[50px] xl:text-[54px]">
-          Ready to create something amazing?
+          Looking for a Software Engineer with Agentic AI expertise?
         </h2>
         <Link href="/contact" className="text-white">
           <GradientTxt
             tagName="h4"
-            txt="Let's hop on a call."
+            txt="Let's connect & talk."
             className="call sharedStyles cursor-pointer text-[30px] font-bold tracking-[0.5px] md:text-[50px] xl:text-[54px]"
           />
         </Link>

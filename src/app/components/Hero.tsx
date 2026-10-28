@@ -11,12 +11,12 @@ export default function Hero() {
     <section className="my-[80px] items-center gap-16 xl:flex">
       <div>
         <h1 className="mb-4 text-[32px] font-bold leading-[115%] md:text-[52px] lg:text-[56px]">
-          Engineering scalable backends &{" "}
-          <GradientTxt tagName="span" txt="Autonomous Agentic AI" /> systems.
+          Software Engineer specializing in{" "}
+          <GradientTxt tagName="span" txt="Agentic AI" /> & backend systems.
         </h1>
 
-        <p className="mb-16 text-[19px] text-[#666] lg:text-[22px]">
-          Hi! I&apos;m Ahmed Faaz Laeeq — a Software Engineer with an AD in Software Development (CGPA 3.88) and BS in FinTech (CGPA 3.87). I build production backend services in Node.js, FastAPI, and .NET, design normalized relational databases, and build autonomous multi-agent pipelines with CrewAI, LangChain, and AWS Bedrock AgentCore.
+        <p className="mb-16 text-[19px] leading-relaxed text-[#666] lg:text-[22px]">
+          Hi! I&apos;m Ahmed Faaz Laeeq — a Software Engineer with Agentic AI expertise, actively looking for entry-level opportunities. With an Associate Degree in Software Development (CGPA 3.88), completing my BS in FinTech (CGPA 3.87) at MAJU, and a verified Udacity AWS Agent Engineer Nanodegree, I combine strong CS fundamentals, backend API engineering (FastAPI, Node.js, .NET), and hands-on experience building autonomous multi-agent systems with CrewAI and AWS Bedrock.
         </p>
 
         <div className="mb-16 flex flex-col gap-4 md:flex-row xl:items-center">
