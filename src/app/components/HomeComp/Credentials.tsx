@@ -54,6 +54,21 @@ export default function Credentials() {
 
   const documentCredentials: DocumentCredential[] = [
     {
+      id: "udacity-aws-agent",
+      title: "Future AWS Agent Engineer",
+      issuer: "Udacity (Part of Accenture)",
+      date: "October 2026",
+      grade: "Nanodegree Program Completion",
+      description:
+        "Verified Nanodegree credential certifying expertise in designing, building, and deploying autonomous AI agents on AWS, foundation models, agentic workflows, memory systems, and multi-agent systems.",
+      badge: "Agentic AI Nanodegree",
+      image: "/credentials/udacity-future-aws-agent-engineer-nanodegree.png",
+      pdfUrl: "/credentials/udacity-future-aws-agent-engineer-nanodegree.pdf",
+      verificationUrl:
+        "https://www.udacity.com/certificate/e/c0d36cd2-900d-11f1-925c-eff75458ddbc",
+      tags: ["AWS Agentic AI", "Autonomous Agents", "Cloud Scale", "Udacity Nanodegree"],
+    },
+    {
       id: "maju-degree",
       title: "Associate Degree in Software Development",
       issuer: "Mohammad Ali Jinnah University (MAJU)",
