@@ -1,6 +1,5 @@
 import Image from "next/image";
 import FadeUp from "@/animations/FadeUp";
-import { Briefcase, GraduationCap, Building2 } from "lucide-react";
 
 interface EduSectProps {
   type: "edu" | "work";
@@ -9,7 +8,6 @@ interface EduSectProps {
   date: string;
   img?: string;
   alt?: string;
-  badge?: string;
 }
 
 export default function EduSect({
@@ -19,52 +17,58 @@ export default function EduSect({
   date,
   img,
   alt,
-  badge,
 }: EduSectProps) {
   return (
     <FadeUp
       tag="div"
-      className="group relative flex cursor-default flex-col justify-between gap-4 border-b border-neutral-800/80 pb-8 transition-colors duration-200 hover:border-neutral-700 xl:flex-row xl:items-start"
+      className="group relative flex cursor-pointer flex-col justify-between gap-4 border-b border-neutral-800 pb-10 xl:flex-row xl:items-end"
     >
-      <div className="flex items-start gap-4">
-        <div className="flex size-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-neutral-800 bg-neutral-900 text-blue-400 transition-colors group-hover:border-neutral-700 group-hover:text-emerald-400">
-          {img ? (
+      <div className={`${type === "work" && "flex items-center gap-4"}`}>
+        {type === "work" && img ? (
+          <div className="size-10 min-w-10 rounded-full bg-gray-400">
             <Image
               src={img}
               width={40}
               height={40}
               alt={alt || name}
-              className="size-full rounded-xl object-contain p-1"
+              className="rounded-full border border-gray-400"
             />
-          ) : type === "work" ? (
-            <Briefcase className="size-5" />
-          ) : (
-            <GraduationCap className="size-5" />
-          )}
-        </div>
+          </div>
+        ) : null}
 
         <div>
-          <div className="flex flex-wrap items-center gap-2">
-            <h4 className="text-[18px] font-bold leading-snug text-white transition-colors group-hover:text-blue-300 md:text-[21px]">
-              {name}
-            </h4>
-            {badge && (
-              <span className="rounded-full border border-neutral-800 bg-neutral-900 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
-                {badge}
-              </span>
-            )}
-          </div>
-          <p className="mt-1 text-sm leading-relaxed text-[#888] md:text-[15px]">
-            {title}
+          <p className="mb-2 text-[19px] leading-[110%] md:text-[24px] xl:font-medium text-white">
+            {name}
           </p>
+          <p className="font-medium leading-[130%] text-[#666]">{title}</p>
         </div>
       </div>
 
-      <div className="shrink-0 xl:text-right">
-        <span className="rounded-full border border-neutral-800/60 bg-neutral-900/60 px-3 py-1 text-xs font-semibold text-neutral-400">
-          {date}
-        </span>
-      </div>
+      <p className="leading-[130%] text-[#666]">.{date}</p>
+
+      {type === "work" ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-briefcase absolute right-2 top-0 transition-all duration-300 group-hover:right-0 text-[#666]"
+          viewBox="0 0 16 16"
+        >
+          <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-book absolute right-2 top-0 transition-all duration-300 group-hover:right-0 text-[#666]"
+          viewBox="0 0 16 16"
+        >
+          <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+        </svg>
+      )}
     </FadeUp>
   );
 }
