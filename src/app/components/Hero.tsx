@@ -5,21 +5,12 @@ import GradientTxt from "./Reusables/GradientTxt";
 import profImg from "../../../public/me with border circle.png";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="my-[60px] items-center gap-16 xl:my-[80px] xl:flex">
       <div className="flex-1">
-        {/* Looking for Job Status Pill */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-800/80 bg-emerald-950/40 px-4 py-1.5 text-xs font-semibold text-emerald-400 backdrop-blur-sm">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-          </span>
-          Actively Seeking Software Engineer & Backend / AI Roles
-        </div>
-
         <h1 className="mb-6 text-[38px] font-bold leading-[110%] md:text-[62px] lg:text-[68px]">
           Engineering scalable backends &{" "}
           <GradientTxt tagName="span" txt="Autonomous Agentic AI" /> systems.

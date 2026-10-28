@@ -48,10 +48,6 @@ export default function ProfileInfo() {
           <h2 className="mb-4 mt-2 text-[36px] font-bold leading-[115%] tracking-[0.5px] md:text-[50px]">
             Engineering resilient backends & autonomous intelligence.
           </h2>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-800/80 bg-emerald-950/40 px-3.5 py-1 text-xs font-semibold text-emerald-400">
-            <span className="size-2 rounded-full bg-emerald-400"></span>
-            Actively Available for Full-Time Roles
-          </div>
         </div>
 
         <div className="space-y-4 text-[16px] leading-relaxed text-[#888] md:text-[18px] lg:max-w-[52%]">
