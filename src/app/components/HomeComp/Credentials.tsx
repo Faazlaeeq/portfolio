@@ -213,14 +213,16 @@ export default function Credentials() {
     return () => clearInterval(interval);
   }, [activeModal, isPaused, documentCredentials.length]);
 
-  // Sync filmstrip scroll position with currentSlide
+  // Sync filmstrip scroll position with currentSlide (scroll container horizontally only, never window)
   useEffect(() => {
-    if (filmstripRef.current && filmstripRef.current.children[currentSlide]) {
-      const activeEl = filmstripRef.current.children[currentSlide] as HTMLElement;
-      activeEl.scrollIntoView({
+    const container = filmstripRef.current;
+    if (container && container.children[currentSlide]) {
+      const activeEl = container.children[currentSlide] as HTMLElement;
+      const targetScroll =
+        activeEl.offsetLeft - container.clientWidth / 2 + activeEl.clientWidth / 2;
+      container.scrollTo({
+        left: targetScroll,
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     }
   }, [currentSlide]);
