@@ -12,8 +12,6 @@ import {
   Calendar,
   Eye,
   ExternalLink,
-  ChevronLeft,
-  ChevronRight,
   Film,
 } from "lucide-react";
 
@@ -229,16 +227,6 @@ export default function Credentials() {
 
   const activeCred = documentCredentials[currentSlide];
 
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % documentCredentials.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + documentCredentials.length) % documentCredentials.length
-    );
-  };
-
   const openDocumentModal = (cred: DocumentCredential) => {
     setActiveModal({
       id: cred.id,
@@ -259,40 +247,6 @@ export default function Credentials() {
           txt="CREDENTIALS & DEGREES"
           className="mb-4 text-[22px] font-bold tracking-[4px]"
         />
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className="text-[36px] font-bold leading-[110%] tracking-[0.5px] md:text-[50px] xl:text-[54px]">
-            Verified Degrees & Certifications
-          </h2>
-
-          {/* Slide Navigation Controls */}
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold tracking-widest text-neutral-400">
-              {String(currentSlide + 1).padStart(2, "0")} /{" "}
-              {String(documentCredentials.length).padStart(2, "0")}
-            </span>
-            <button
-              type="button"
-              onClick={handlePrev}
-              className="flex size-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 transition-colors hover:border-neutral-600 hover:bg-neutral-800 hover:text-white"
-              aria-label="Previous credential"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
-            <button
-              type="button"
-              onClick={handleNext}
-              className="flex size-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 transition-colors hover:border-neutral-600 hover:bg-neutral-800 hover:text-white"
-              aria-label="Next credential"
-            >
-              <ChevronRight className="size-5" />
-            </button>
-          </div>
-        </div>
-
-        <p className="mt-3 max-w-[700px] text-[18px] text-[#888] md:text-[20px]">
-          Formal academic degrees, industry certifications, and verified credentials
-          validating my software engineering, cloud AI, and database expertise.
-        </p>
       </div>
 
       {/* Featured Active Slideshow Display Card */}
