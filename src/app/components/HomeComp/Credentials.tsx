@@ -14,18 +14,23 @@ interface DocumentCredential {
   image: string;
   pdfUrl?: string;
   verificationUrl?: string;
+  logo: string;
+  description: string;
 }
 
 const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
   {
     id: "udacity-aws-agent",
-    title: "Future AWS Agent Engineer",
+    title: "Future AWS Agent Engineer (Nanodegree)",
     issuer: "Udacity (Part of Accenture)",
     date: "October 2026",
     image: "/credentials/udacity-future-aws-agent-engineer-nanodegree.png",
     pdfUrl: "/credentials/udacity-future-aws-agent-engineer-nanodegree.pdf",
     verificationUrl:
       "https://www.udacity.com/certificate/e/c0d36cd2-900d-11f1-925c-eff75458ddbc",
+    logo: "/logos/udacity-logo.svg",
+    description:
+      "Autonomous multi-agent architectures, CrewAI orchestration, AWS Bedrock, Lambda & Agentic RAG workflows.",
   },
   {
     id: "maju-degree",
@@ -33,6 +38,9 @@ const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
     issuer: "Mohammad Ali Jinnah University (MAJU)",
     date: "October 2024",
     image: "/credentials/maju-associate-degree-software-development.jpg",
+    logo: "/logos/maju-logo.png",
+    description:
+      "Graduated Magna Cum Laude (CGPA: 3.88 / 4.00). Computer science fundamentals, data structures, algorithms & software design.",
   },
   {
     id: "aptech-diploma",
@@ -40,6 +48,9 @@ const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
     issuer: "Aptech Computer Education",
     date: "December 2022",
     image: "/credentials/aptech-advanced-diploma-software-engineering.jpg",
+    logo: "/logos/aptech-logo.png",
+    description:
+      "Enterprise application architecture, relational databases, algorithms & C# / .NET development.",
   },
   {
     id: "udacity-aws-ai",
@@ -50,6 +61,9 @@ const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
     pdfUrl: "/credentials/udacity-aws-ai-practitioner-certificate.pdf",
     verificationUrl:
       "https://www.udacity.com/certificate/e/9fd0fdf6-340a-11f1-8447-d7f20d8c41a3",
+    logo: "/logos/udacity-logo.svg",
+    description:
+      "Foundational cloud AI concepts, machine learning pipelines, and AWS artificial intelligence services.",
   },
   {
     id: "hackerrank-sql",
@@ -58,6 +72,9 @@ const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
     date: "February 2024",
     image: "/credentials/hackerrank-sql-intermediate-certificate.png",
     pdfUrl: "/credentials/hackerrank-sql-intermediate-certificate.pdf",
+    logo: "/logos/hackerrank-logo.svg",
+    description:
+      "Complex joins, subqueries, aggregation functions, query optimization, and relational data modeling.",
   },
   {
     id: "udemy-flutter",
@@ -66,6 +83,9 @@ const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
     date: "February 2025",
     image: "/credentials/udemy-flutter-dart-certificate.jpg",
     verificationUrl: "https://ude.my/UC-bb16454e-1959-4ff1-accf-958ea59db2ef",
+    logo: "/logos/udemy-logo.png",
+    description:
+      "Cross-platform mobile engineering, Bloc state management, animations, and REST backend integration.",
   },
   {
     id: "10pearls-cert",
@@ -74,6 +94,9 @@ const DOCUMENT_CREDENTIALS: DocumentCredential[] = [
     date: "2026",
     image: "/credentials/10pearls-certificate-photo.jpg",
     pdfUrl: "/credentials/Ahmed_Faaz_Laeeq_certificate.pdf",
+    logo: "/logos/10p-logo.svg",
+    description:
+      "Exploratory data analysis, predictive statistical modeling, feature engineering & Scikit-Learn pipelines.",
   },
 ];
 
@@ -122,7 +145,7 @@ export default function Credentials() {
         />
       </div>
 
-      {/* Centered Coverflow Slideshow with Peeked Previous and Next Slides */}
+      {/* 1. Centered Coverflow Slideshow with Peeked Previous and Next Slides */}
       <div className="relative mx-auto flex w-full max-w-[1100px] items-center justify-center overflow-hidden px-4 py-4">
         {/* Previous Slide (Left Peek) */}
         <div
@@ -255,6 +278,89 @@ export default function Credentials() {
         </div>
       </div>
 
+      {/* 2. Separate List of All Certifications & Credentials */}
+      <div className="container mx-auto mt-20 px-5 lg:px-20">
+        <div className="mb-10 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <GradientTxt
+              tagName="h5"
+              txt="CREDENTIALS DIRECTORY"
+              className="text-[14px] font-bold tracking-[3px]"
+            />
+            <h4 className="mt-2 text-[27px] font-bold text-white md:text-[36px]">
+              📜 Verified Credentials List
+            </h4>
+          </div>
+          <span className="text-sm text-neutral-500">
+            Click any entry to inspect certificate document or verify
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          {DOCUMENT_CREDENTIALS.map((cred, idx) => {
+            const isSelected = idx === currentIndex;
+            return (
+              <div
+                key={cred.id}
+                onClick={() => {
+                  setCurrentIndex(idx);
+                  setActiveModal(cred);
+                }}
+                className={`group relative flex cursor-pointer flex-col justify-between gap-4 border-b border-neutral-800/80 pb-6 transition-all duration-200 hover:border-neutral-700 md:flex-row md:items-center ${
+                  isSelected ? "border-neutral-600" : ""
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex size-12 min-w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-800 bg-neutral-900/90 p-2">
+                    <Image
+                      src={cred.logo}
+                      width={40}
+                      height={40}
+                      alt={cred.issuer}
+                      className="size-full object-contain"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-[18px] font-bold leading-snug text-white transition-colors group-hover:text-blue-300 md:text-[20px]">
+                        {cred.title}
+                      </p>
+                      {cred.verificationUrl && (
+                        <span className="inline-flex items-center rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-400">
+                          Verified
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-0.5 text-sm font-medium leading-relaxed text-[#888] md:text-[14px]">
+                      {cred.issuer} · {cred.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex shrink-0 items-center gap-4 md:text-right">
+                  <span className="text-sm font-medium text-[#777]">
+                    .{cred.date}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentIndex(idx);
+                      setActiveModal(cred);
+                    }}
+                    className="flex size-8 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
+                    title="Inspect certificate document"
+                  >
+                    <Maximize2 className="size-4" />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Clean Full-Screen / On-Site Modal */}
       <AnimatePresence>
         {activeModal && (
@@ -304,26 +410,50 @@ export default function Credentials() {
                 </div>
               </div>
 
-              {/* Modal Content: Full Document Display on site */}
-              <div className="relative flex min-h-[400px] max-h-[78vh] w-full items-center justify-center overflow-auto bg-black p-4">
-                {activeModal.pdfUrl ? (
-                  <iframe
-                    src={`${activeModal.pdfUrl}#toolbar=0&navpanes=0`}
-                    title={activeModal.title}
-                    className="h-[75vh] w-full rounded border border-neutral-800"
+              {/* Modal Content - Preview Image */}
+              <div className="relative flex max-h-[75vh] min-h-[350px] w-full items-center justify-center overflow-auto bg-black p-4">
+                <div className="relative h-[65vh] w-full">
+                  <Image
+                    src={activeModal.image}
+                    alt={activeModal.title}
+                    fill
+                    className="object-contain"
+                    priority
                   />
-                ) : (
-                  <div className="relative flex h-[75vh] w-full items-center justify-center">
-                    <Image
-                      src={activeModal.image}
-                      alt={activeModal.title}
-                      fill
-                      className="object-contain"
-                      sizes="1000px"
-                      priority
-                    />
-                  </div>
-                )}
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-neutral-800 bg-black px-6 py-3">
+                <div className="flex items-center gap-4">
+                  {activeModal.pdfUrl && (
+                    <a
+                      href={activeModal.pdfUrl}
+                      download
+                      className="text-xs font-semibold text-white underline hover:text-emerald-400"
+                    >
+                      Download Original PDF
+                    </a>
+                  )}
+                  {activeModal.verificationUrl && (
+                    <a
+                      href={activeModal.verificationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-emerald-400 underline hover:text-emerald-300"
+                    >
+                      Official Verification Link ↗
+                    </a>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveModal(null)}
+                  className="rounded-md border border-neutral-800 bg-neutral-900 px-4 py-1.5 text-xs font-semibold text-white hover:bg-neutral-800"
+                >
+                  Close
+                </button>
               </div>
             </motion.div>
           </div>
