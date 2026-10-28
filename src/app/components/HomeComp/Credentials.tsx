@@ -41,6 +41,7 @@ interface AdditionalCertification {
 
 export default function Credentials() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [activeModal, setActiveModal] = useState<{
     id: string;
     title: string;
@@ -202,6 +203,27 @@ export default function Credentials() {
       document.body.style.overflow = "auto";
     };
   }, [activeModal, documentCredentials.length]);
+
+  // Auto-advance slides every 4.5 seconds
+  useEffect(() => {
+    if (activeModal || isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % documentCredentials.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [activeModal, isPaused, documentCredentials.length]);
+
+  // Sync filmstrip scroll position with currentSlide
+  useEffect(() => {
+    if (filmstripRef.current && filmstripRef.current.children[currentSlide]) {
+      const activeEl = filmstripRef.current.children[currentSlide] as HTMLElement;
+      activeEl.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [currentSlide]);
 
   const activeCred = documentCredentials[currentSlide];
 
@@ -385,7 +407,9 @@ export default function Credentials() {
 
         <div
           ref={filmstripRef}
-          className="flex gap-4 overflow-x-auto pb-4 pt-2 scrollbar-thin scrollbar-thumb-neutral-800"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="flex gap-4 overflow-x-auto pb-3 pt-2 filmstrip-scroll"
         >
           {documentCredentials.map((cred, index) => {
             const isActive = index === currentSlide;
