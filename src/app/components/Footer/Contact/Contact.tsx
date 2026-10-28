@@ -7,11 +7,6 @@ export default function ContactDetails() {
 
   const navLinks = [
     {
-      name: "About",
-      path: "/#about",
-    },
-
-    {
       name: "Services",
       path: "/#services",
     },

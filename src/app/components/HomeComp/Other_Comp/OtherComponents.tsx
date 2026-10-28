@@ -1,5 +1,4 @@
 import EducationSect from "./comp/Education/educationSect";
-import ProfileInfo from "./comp/profileInfo";
 import Testimonials from "./comp/Testimonials";
 import { Education, Work } from "../../../../../types/Experience";
 import type { Testimonials as TestimonialType } from "../../../../../types/Testimonials";
@@ -14,7 +13,6 @@ export default function OtherComponents({
   return (
     <section>
       <div className="container mx-auto px-5 py-[80px] lg:px-20">
-        <ProfileInfo />
         <EducationSect initialExperiences={initialExperiences} />
         <Testimonials initialTestimonials={initialTestimonials} />
       </div>

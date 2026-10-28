@@ -38,10 +38,10 @@ export default function Header() {
             {/* nav menu desktop */}
             <div className="hidden items-center gap-6 text-[14px] font-medium lg:flex xl:gap-8">
               <Link
-                href="/#about"
+                href="/#credentials"
                 className="my-5 transition-opacity duration-75 hover:opacity-50"
               >
-                About
+                Credentials
               </Link>
               <Link
                 href="/#services"
@@ -50,10 +50,10 @@ export default function Header() {
                 Services
               </Link>
               <Link
-                href="/#credentials"
+                href="/#experience"
                 className="my-5 transition-opacity duration-75 hover:opacity-50"
               >
-                Credentials
+                Experience
               </Link>
               <Link
                 href="/projects"
@@ -107,11 +107,11 @@ export default function Header() {
           >
             <div className="container mx-auto flex flex-col px-5 font-medium">
               <Link
-                href="/#about"
+                href="/#credentials"
                 className="my-5 transition-opacity duration-75 hover:opacity-50"
                 onClick={() => setIsNavClicked(false)}
               >
-                About
+                Credentials
               </Link>
               <Link
                 href="/#services"
@@ -121,11 +121,11 @@ export default function Header() {
                 Services
               </Link>
               <Link
-                href="/#credentials"
+                href="/#experience"
                 className="my-5 transition-opacity duration-75 hover:opacity-50"
                 onClick={() => setIsNavClicked(false)}
               >
-                Credentials
+                Experience
               </Link>
               <Link
                 href="/projects"
