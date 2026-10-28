@@ -2,7 +2,7 @@
 
 import CustomBtn from "./Reusables/CustomBtn";
 import GradientTxt from "./Reusables/GradientTxt";
-import profImg from "../../../public/me with border circle.png";
+import profImg from "../../../public/faaz-profile-circle.png";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ export default function Hero() {
       <div>
         <h1 className="mb-4 text-[32px] font-bold leading-[115%] md:text-[52px] lg:text-[56px]">
           Software Engineer specializing in{" "}
-          <GradientTxt tagName="span" txt="Agentic AI" /> & backend systems.
+          <GradientTxt tagName="span" txt="Agentic AI" />.
         </h1>
 
         <p className="mb-16 text-[19px] leading-relaxed text-[#666] lg:text-[22px]">
@@ -46,12 +46,16 @@ export default function Hero() {
         </div>
       </div>
 
-      <Image
-        src={profImg}
-        alt="Ahmed Faaz Laeeq"
-        className="mx-auto w-full rounded-full lg:w-[500px]"
-        priority
-      />
+      <div className="mx-auto aspect-square w-full max-w-[420px] shrink-0 lg:max-w-[480px]">
+        <Image
+          src={profImg}
+          alt="Ahmed Faaz Laeeq"
+          width={764}
+          height={764}
+          className="size-full rounded-full border border-neutral-800 object-cover shadow-2xl"
+          priority
+        />
+      </div>
     </section>
   );
 }

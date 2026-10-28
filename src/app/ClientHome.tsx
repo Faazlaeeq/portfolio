@@ -2,17 +2,14 @@
 
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import TechStacks from "./components/TechStacks";
-import Credentials from "./components/HomeComp/Credentials";
-import EducationSect from "./components/HomeComp/Other_Comp/comp/Education/educationSect";
-import Services from "./components/HomeComp/Services";
 import Projects from "./components/HomeComp/Projects/Projects";
 import AnimatedSlide from "./components/HomeComp/Projects/Swiper";
+import Credentials from "./components/HomeComp/Credentials";
+import TechStacks from "./components/TechStacks";
+import Services from "./components/HomeComp/Services";
 import Articles from "./components/HomeComp/Articles";
-import ProfileInfo from "./components/HomeComp/Other_Comp/comp/profileInfo";
-import Testimonials from "./components/HomeComp/Other_Comp/comp/Testimonials";
+import OtherComponents from "./components/HomeComp/Other_Comp/OtherComponents";
 import Footer from "./components/Footer/Footer";
-
 import type { Services as ServicesType } from "../../types/Services";
 import type { Project } from "../../types/Project";
 import type { Technology } from "../../types/Technology";
@@ -49,38 +46,30 @@ export default function ClientHome({
           <Hero />
         </div>
 
-        {/* 2. Tech Stacks Marquee */}
-        <TechStacks initialTechStacks={initialTechStacks} />
-
-        {/* 3. Academic & Certifications Section — Appears right after Hero */}
-        <div className="container mx-auto px-5 pt-10 lg:px-20">
-          <Credentials />
-          <EducationSect initialExperiences={initialExperiences} />
-        </div>
-
-        {/* 4. Services & Expertise */}
-        <div className="container mx-auto px-5 pt-10 lg:px-20">
-          <Services initialServices={initialServices} />
-        </div>
-
-        {/* 5. Projects Section with Full-Width Carousel ahead of black bg */}
-        <div className="container mx-auto px-5 pt-10 lg:px-20">
+        {/* 2. Projects Section (immediately after Hero) */}
+        <div className="container mx-auto px-5 pt-8 lg:px-20">
           <Projects />
         </div>
         <div className="relative h-[400px]">
           <AnimatedSlide initialProjects={initialProjects} />
         </div>
 
-        {/* 6. Articles Section */}
-        <Articles initialArticles={initialArticles} />
-
-        {/* 7. About & Client Reviews */}
-        <div className="container mx-auto px-5 py-10 lg:px-20">
-          <ProfileInfo />
-          <Testimonials initialTestimonials={initialTestimonials} />
+        {/* 3. Certifications / Credentials Section (immediately after Projects) */}
+        <div className="container mx-auto px-5 pt-28 lg:px-20">
+          <Credentials />
         </div>
-      </main>
 
+        {/* 4. Rest of the Sections */}
+        <TechStacks initialTechStacks={initialTechStacks} />
+        <div className="container mx-auto px-5 pt-16 lg:px-20">
+          <Services initialServices={initialServices} />
+        </div>
+        <Articles initialArticles={initialArticles} />
+        <OtherComponents
+          initialExperiences={initialExperiences}
+          initialTestimonials={initialTestimonials}
+        />
+      </main>
       <Footer key="footer" initialFaqs={initialFaqs} />
     </>
   );
