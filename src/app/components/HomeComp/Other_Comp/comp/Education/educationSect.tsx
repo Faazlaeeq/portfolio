@@ -129,7 +129,11 @@ export function EducationSect() {
   );
 }
 
-export default function CombinedExperienceSect() {
+export default function CombinedExperienceSect({
+  initialExperiences,
+}: {
+  initialExperiences?: any;
+} = {}) {
   return (
     <div className="w-full flex flex-col gap-12">
       <WorkExperienceSect />

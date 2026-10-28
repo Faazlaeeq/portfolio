@@ -110,7 +110,11 @@ const UPWORK_REVIEWS: UpworkReview[] = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({
+  initialTestimonials,
+}: {
+  initialTestimonials?: any;
+} = {}) {
   const [current, setCurrent] = useState(0);
 
   const handleNext = () => {
