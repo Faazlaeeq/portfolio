@@ -4,7 +4,7 @@ import GradientTxt from "../../Reusables/GradientTxt";
 
 export default function Projects() {
   return (
-    <section id="projects" className="mb-5">
+    <section className="mb-5">
       <FadeUp
         tag="div"
         className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-0"

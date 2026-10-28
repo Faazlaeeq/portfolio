@@ -112,9 +112,9 @@ export default function Credentials() {
   }, [activeModal, length]);
 
   return (
-    <section id="credentials" className="my-16 w-full">
+    <section id="credentials" className="w-full bg-black py-16 lg:py-24">
       {/* Clean section header matching original website style */}
-      <div className="mb-8">
+      <div className="container mx-auto mb-10 px-5 lg:px-20">
         <GradientTxt
           tagName="h5"
           txt="CREDENTIALS & DEGREES"
@@ -123,13 +123,13 @@ export default function Credentials() {
       </div>
 
       {/* Centered Coverflow Slideshow with Peeked Previous and Next Slides */}
-      <div className="relative mx-auto flex w-full max-w-[1100px] items-center justify-center overflow-hidden py-4">
+      <div className="relative mx-auto flex w-full max-w-[1100px] items-center justify-center overflow-hidden px-4 py-4">
         {/* Previous Slide (Left Peek) */}
         <div
           onClick={handlePrev}
           className="absolute left-0 z-10 hidden w-[38%] -translate-x-6 cursor-pointer opacity-35 transition-all duration-300 hover:opacity-70 md:block"
         >
-          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-lg border border-neutral-800 bg-[#0a0a0a]">
+          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-lg border border-neutral-800 bg-black">
             <Image
               src={prevCred.image}
               alt={prevCred.title}
@@ -144,7 +144,7 @@ export default function Credentials() {
         <div className="relative z-20 w-full max-w-[680px]">
           <div
             onClick={() => setActiveModal(activeCred)}
-            className="group relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-lg border border-neutral-800 bg-[#0a0a0a]"
+            className="group relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-lg border border-neutral-800 bg-black"
           >
             <Image
               src={activeCred.image}
@@ -156,7 +156,7 @@ export default function Credentials() {
             />
             {/* Hover overlay hint */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-              <span className="flex items-center gap-2 rounded-md border border-neutral-700 bg-black/85 px-4 py-2 text-xs font-semibold text-white">
+              <span className="flex items-center gap-2 rounded-md border border-neutral-700 bg-black/90 px-4 py-2 text-xs font-semibold text-white">
                 <Maximize2 className="size-4 text-emerald-400" />
                 Click to inspect document
               </span>
@@ -169,7 +169,7 @@ export default function Credentials() {
           onClick={handleNext}
           className="absolute right-0 z-10 hidden w-[38%] translate-x-6 cursor-pointer opacity-35 transition-all duration-300 hover:opacity-70 md:block"
         >
-          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-lg border border-neutral-800 bg-[#0a0a0a]">
+          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-lg border border-neutral-800 bg-black">
             <Image
               src={nextCred.image}
               alt={nextCred.title}
@@ -199,8 +199,8 @@ export default function Credentials() {
         </button>
       </div>
 
-      {/* Slide Details & Clean Action Links (No Vibe-coded Tags) */}
-      <div className="mx-auto mt-4 max-w-[680px] text-center">
+      {/* Slide Details & Clean Action Links */}
+      <div className="mx-auto mt-6 max-w-[680px] px-4 text-center">
         <h3 className="text-lg font-bold text-white md:text-2xl">
           {activeCred.title}
         </h3>
@@ -232,29 +232,34 @@ export default function Credentials() {
           )}
         </div>
 
-        {/* Minimal dot indicators */}
-        <div className="mt-5 flex items-center justify-center gap-2">
-          {DOCUMENT_CREDENTIALS.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                idx === currentIndex
-                  ? "w-6 bg-white"
-                  : "w-2 bg-neutral-700 hover:bg-neutral-500"
-              }`}
-            />
-          ))}
+        {/* Number Indicators with generous space in between */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          {DOCUMENT_CREDENTIALS.map((_, idx) => {
+            const isActive = idx === currentIndex;
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to credential ${idx + 1}`}
+                className={`text-sm sm:text-base font-bold transition-all duration-200 px-2 py-1 ${
+                  isActive
+                    ? "text-white border-b-2 border-white scale-110"
+                    : "text-neutral-600 hover:text-neutral-400"
+                }`}
+              >
+                {String(idx + 1).padStart(2, "0")}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Clean Full-Screen / On-Site Modal (Matching Image 3) */}
+      {/* Clean Full-Screen / On-Site Modal */}
       <AnimatePresence>
         {activeModal && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
             onClick={() => setActiveModal(null)}
           >
             <motion.div
@@ -263,7 +268,7 @@ export default function Credentials() {
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative flex max-h-[92vh] w-full max-w-[1000px] flex-col overflow-hidden rounded-lg border border-neutral-800 bg-[#0a0a0a]"
+              className="relative flex max-h-[92vh] w-full max-w-[1000px] flex-col overflow-hidden rounded-lg border border-neutral-800 bg-black"
             >
               {/* Modal Top Bar */}
               <div className="flex items-center justify-between border-b border-neutral-800 px-6 py-4">

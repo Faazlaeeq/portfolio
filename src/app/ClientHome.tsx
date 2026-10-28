@@ -4,36 +4,33 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Projects from "./components/HomeComp/Projects/Projects";
 import AnimatedSlide from "./components/HomeComp/Projects/Swiper";
-import Credentials from "./components/HomeComp/Credentials";
 import TechStacks from "./components/TechStacks";
-import Services from "./components/HomeComp/Services";
-import Articles from "./components/HomeComp/Articles";
-import OtherComponents from "./components/HomeComp/Other_Comp/OtherComponents";
+import {
+  WorkExperienceSect,
+  EducationSect,
+} from "./components/HomeComp/Other_Comp/comp/Education/educationSect";
+import Credentials from "./components/HomeComp/Credentials";
+import Testimonials from "./components/HomeComp/Other_Comp/comp/Testimonials";
 import Footer from "./components/Footer/Footer";
-import type { Services as ServicesType } from "../../types/Services";
 import type { Project } from "../../types/Project";
 import type { Technology } from "../../types/Technology";
-import type { ArticleProps } from "../../types/Articles";
-import type { Education, Work } from "../../types/Experience";
 import type { Testimonials as TestimonialsType } from "../../types/Testimonials";
 import type { FAQ as FAQType } from "../../types/FAQ";
 
 interface ClientHomeProps {
-  initialServices?: ServicesType[];
   initialProjects?: Project[];
   initialTechStacks?: Technology[];
-  initialArticles?: ArticleProps[];
-  initialExperiences?: { education: Education[]; work: Work[] };
   initialTestimonials?: TestimonialsType[];
   initialFaqs?: FAQType[];
+  // Kept for backwards compatibility if passed from parent
+  initialServices?: any[];
+  initialArticles?: any[];
+  initialExperiences?: any;
 }
 
 export default function ClientHome({
-  initialServices,
   initialProjects,
   initialTechStacks,
-  initialArticles,
-  initialExperiences,
   initialTestimonials,
   initialFaqs,
 }: ClientHomeProps) {
@@ -46,29 +43,37 @@ export default function ClientHome({
           <Hero />
         </div>
 
-        {/* 2. Projects Section (immediately after Hero) */}
+        {/* 2. Projects Section */}
         <div className="container mx-auto px-5 pt-8 lg:px-20">
           <Projects />
         </div>
-        <div className="relative h-[400px]">
+        {/* Swiper wrapper with ample clearance to prevent collision with subsequent sections */}
+        <div className="relative min-h-[580px] md:min-h-[620px] pb-10">
           <AnimatedSlide initialProjects={initialProjects} />
         </div>
 
-        {/* 3. Certifications / Credentials Section (immediately after Projects) */}
-        <div className="container mx-auto px-5 pt-28 lg:px-20">
-          <Credentials />
+        {/* Tech Stacks Marquee Divider */}
+        <div className="mt-8">
+          <TechStacks initialTechStacks={initialTechStacks} />
         </div>
 
-        {/* 4. Rest of the Sections */}
-        <TechStacks initialTechStacks={initialTechStacks} />
-        <div className="container mx-auto px-5 pt-16 lg:px-20">
-          <Services initialServices={initialServices} />
+        {/* 3. Work Experience Section (Single Column) */}
+        <div className="container mx-auto px-5 pt-12 lg:px-20">
+          <WorkExperienceSect />
         </div>
-        <Articles initialArticles={initialArticles} />
-        <OtherComponents
-          initialExperiences={initialExperiences}
-          initialTestimonials={initialTestimonials}
-        />
+
+        {/* 4. Certifications & Credentials Section (Pure Black Background) */}
+        <Credentials />
+
+        {/* 5. Education Section (Single Column) */}
+        <div className="container mx-auto px-5 pt-12 lg:px-20">
+          <EducationSect />
+        </div>
+
+        {/* 6. Testimonials Section */}
+        <div className="container mx-auto px-5 py-16 lg:px-20">
+          <Testimonials initialTestimonials={initialTestimonials} />
+        </div>
       </main>
       <Footer key="footer" initialFaqs={initialFaqs} />
     </>

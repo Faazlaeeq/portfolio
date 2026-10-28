@@ -35,20 +35,9 @@ export default function Header() {
                 d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
               />
             </svg>
-            {/* nav menu desktop */}
+
+            {/* Nav menu desktop */}
             <div className="hidden items-center gap-6 text-[14px] font-medium lg:flex xl:gap-8">
-              <Link
-                href="/#credentials"
-                className="my-5 transition-opacity duration-75 hover:opacity-50"
-              >
-                Credentials
-              </Link>
-              <Link
-                href="/#services"
-                className="my-5 transition-opacity duration-75 hover:opacity-50"
-              >
-                Services
-              </Link>
               <Link
                 href="/#experience"
                 className="my-5 transition-opacity duration-75 hover:opacity-50"
@@ -56,16 +45,22 @@ export default function Header() {
                 Experience
               </Link>
               <Link
+                href="/#credentials"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
+              >
+                Certifications
+              </Link>
+              <Link
+                href="/#education"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
+              >
+                Education
+              </Link>
+              <Link
                 href="/projects"
                 className={`my-5 transition-opacity duration-75 ${pathname.includes("/projects") ? "opacity-50" : "hover:opacity-50"}`}
               >
                 Projects
-              </Link>
-              <Link
-                href="/articles"
-                className={`my-5 transition-opacity duration-75 ${pathname.includes("/articles") ? "opacity-50" : "hover:opacity-50"}`}
-              >
-                Articles
               </Link>
               <Link
                 href="/contact"
@@ -89,8 +84,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* nav menu */}
-
+          {/* Nav menu mobile */}
           <motion.div
             initial={{
               height: 0,
@@ -107,43 +101,36 @@ export default function Header() {
           >
             <div className="container mx-auto flex flex-col px-5 font-medium">
               <Link
-                href="/#credentials"
-                className="my-5 transition-opacity duration-75 hover:opacity-50"
-                onClick={() => setIsNavClicked(false)}
-              >
-                Credentials
-              </Link>
-              <Link
-                href="/#services"
-                className="my-5 transition-opacity duration-75 hover:opacity-50"
-                onClick={() => setIsNavClicked(false)}
-              >
-                Services
-              </Link>
-              <Link
                 href="/#experience"
-                className="my-5 transition-opacity duration-75 hover:opacity-50"
+                className="my-4 transition-opacity duration-75 hover:opacity-50"
                 onClick={() => setIsNavClicked(false)}
               >
                 Experience
               </Link>
               <Link
+                href="/#credentials"
+                className="my-4 transition-opacity duration-75 hover:opacity-50"
+                onClick={() => setIsNavClicked(false)}
+              >
+                Certifications
+              </Link>
+              <Link
+                href="/#education"
+                className="my-4 transition-opacity duration-75 hover:opacity-50"
+                onClick={() => setIsNavClicked(false)}
+              >
+                Education
+              </Link>
+              <Link
                 href="/projects"
-                className={`my-5 transition-opacity duration-75 ${pathname.includes("projects") ? "opacity-50" : "hover:opacity-50"}`}
+                className={`my-4 transition-opacity duration-75 ${pathname.includes("projects") ? "opacity-50" : "hover:opacity-50"}`}
                 onClick={() => setIsNavClicked(false)}
               >
                 Projects
               </Link>
               <Link
-                href="/articles"
-                className={`my-5 transition-opacity duration-75 ${pathname.includes("/articles") ? "opacity-50" : "hover:opacity-50"}`}
-                onClick={() => setIsNavClicked(false)}
-              >
-                Articles
-              </Link>
-              <Link
                 href="/contact"
-                className={`my-5 flex items-center gap-2 transition-opacity duration-75 ${pathname === "/contact" ? "opacity-50" : "hover:opacity-50"}`}
+                className={`my-4 flex items-center gap-2 transition-opacity duration-75 ${pathname === "/contact" ? "opacity-50" : "hover:opacity-50"}`}
                 onClick={() => setIsNavClicked(false)}
               >
                 <span>Book a call</span>

@@ -126,7 +126,7 @@ export default function Testimonials() {
   const activeReview = UPWORK_REVIEWS[current];
 
   return (
-    <section id="testimonials" className="w-full py-4">
+    <section className="mt-[102px]">
       <FadeUp tag="div">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>

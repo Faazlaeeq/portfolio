@@ -7,45 +7,33 @@ export default function ContactDetails() {
 
   const navLinks = [
     {
-      name: "Services",
-      path: "/#services",
-    },
-
-    {
-      name: "Credentials",
-      path: "/#credentials",
-    },
-
-    {
       name: "Experience",
       path: "/#experience",
     },
-
     {
-      name: "Contact",
-      path: "/contact",
+      name: "Certifications",
+      path: "/#credentials",
     },
-
     {
-      name: "Articles",
-      path: "/articles",
+      name: "Education",
+      path: "/#education",
     },
-
     {
       name: "Projects",
       path: "/projects",
     },
-
+    {
+      name: "Contact",
+      path: "/contact",
+    },
     {
       name: "Linkedin",
       path: "https://www.linkedin.com/in/faazlaeeq",
     },
-
     {
       name: "Twitter",
       path: "https://x.com/faazlaeeq",
     },
-
     {
       name: "Github",
       path: "https://github.com/faazlaeeq",
