@@ -8,9 +8,9 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section id="hero" className="py-4 lg:py-6 items-center gap-12 xl:flex">
+    <section className="my-[80px] items-center gap-16 xl:flex">
       <div>
-        <h1 className="mb-4 text-[40px] font-bold leading-[110%] md:text-[68px] lg:text-[70px]">
+        <h1 className="mb-4 text-[32px] font-bold leading-[115%] md:text-[52px] lg:text-[56px]">
           Engineering scalable backends &{" "}
           <GradientTxt tagName="span" txt="Autonomous Agentic AI" /> systems.
         </h1>

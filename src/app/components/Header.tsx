@@ -11,20 +11,18 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="relative w-full">
+    <header className="relative">
       <div className="container mx-auto px-5 pt-5 lg:px-20">
         <nav>
           <div className="flex items-center justify-between pb-3">
             <Link
               href="/"
-              className="text-[15px] font-medium italic sm:text-base md:text-[24px] lg:font-bold"
+              className="text-[14px] font-medium italic sm:text-base md:text-[20px] lg:font-bold"
             >
               <GradientTxt tagName="span" txt="<" />
               {"Faaz"}
               <GradientTxt tagName="span" txt="DotDev />." />
             </Link>
-
-            {/* Mobile Hamburger Icon */}
             <svg
               onClick={() => setIsNavClicked(!isNavClicked)}
               xmlns="http://www.w3.org/2000/svg"
@@ -37,48 +35,41 @@ export default function Header() {
                 d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
               />
             </svg>
-
-            {/* Desktop Navigation Menu */}
-            <div className="hidden items-center gap-6 font-medium lg:flex xl:gap-8">
+            {/* nav menu desktop */}
+            <div className="hidden items-center gap-6 text-[14px] font-medium lg:flex xl:gap-8">
               <Link
-                href="/#credentials"
-                className="my-5 transition-opacity duration-75 hover:opacity-50 text-sm md:text-base"
+                href="/#about"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
               >
-                Credentials
+                About
               </Link>
               <Link
                 href="/#services"
-                className="my-5 transition-opacity duration-75 hover:opacity-50 text-sm md:text-base"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
               >
                 Services
               </Link>
               <Link
+                href="/#credentials"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
+              >
+                Credentials
+              </Link>
+              <Link
                 href="/projects"
-                className={`my-5 transition-opacity duration-75 text-sm md:text-base ${
-                  pathname.includes("/projects") ? "opacity-50" : "hover:opacity-50"
-                }`}
+                className={`my-5 transition-opacity duration-75 ${pathname.includes("/projects") ? "opacity-50" : "hover:opacity-50"}`}
               >
                 Projects
               </Link>
               <Link
                 href="/articles"
-                className={`my-5 transition-opacity duration-75 text-sm md:text-base ${
-                  pathname.includes("/articles") ? "opacity-50" : "hover:opacity-50"
-                }`}
+                className={`my-5 transition-opacity duration-75 ${pathname.includes("/articles") ? "opacity-50" : "hover:opacity-50"}`}
               >
                 Articles
               </Link>
               <Link
-                href="/#about"
-                className="my-5 transition-opacity duration-75 hover:opacity-50 text-sm md:text-base"
-              >
-                About
-              </Link>
-              <Link
                 href="/contact"
-                className={`my-5 flex items-center gap-2 transition-opacity duration-75 text-sm md:text-base ${
-                  pathname === "/contact" ? "opacity-50" : "hover:opacity-50"
-                }`}
+                className={`my-5 flex items-center gap-3 transition-opacity duration-75 ${pathname === "/contact" ? "opacity-50" : "hover:opacity-50"}`}
               >
                 <span>Book a call</span>
                 <svg
@@ -98,7 +89,8 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Mobile Nav Slide-Down Menu */}
+          {/* nav menu */}
+
           <motion.div
             initial={{
               height: 0,
@@ -110,60 +102,48 @@ export default function Header() {
               zIndex: isNavClicked ? "500" : "-5",
               padding: isNavClicked ? "20px" : 0,
             }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
             className="absolute left-0 top-14 w-full overflow-hidden bg-black p-5 shadow-lg lg:hidden"
           >
             <div className="container mx-auto flex flex-col px-5 font-medium">
               <Link
-                href="/#credentials"
-                className="my-3 transition-opacity duration-75 hover:opacity-50"
+                href="/#about"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
                 onClick={() => setIsNavClicked(false)}
               >
-                Credentials
+                About
               </Link>
               <Link
                 href="/#services"
-                className="my-3 transition-opacity duration-75 hover:opacity-50"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
                 onClick={() => setIsNavClicked(false)}
               >
                 Services
               </Link>
               <Link
+                href="/#credentials"
+                className="my-5 transition-opacity duration-75 hover:opacity-50"
+                onClick={() => setIsNavClicked(false)}
+              >
+                Credentials
+              </Link>
+              <Link
                 href="/projects"
-                className={`my-3 transition-opacity duration-75 ${
-                  pathname.includes("projects")
-                    ? "opacity-50"
-                    : "hover:opacity-50"
-                }`}
+                className={`my-5 transition-opacity duration-75 ${pathname.includes("projects") ? "opacity-50" : "hover:opacity-50"}`}
                 onClick={() => setIsNavClicked(false)}
               >
                 Projects
               </Link>
               <Link
                 href="/articles"
-                className={`my-3 transition-opacity duration-75 ${
-                  pathname.includes("/articles")
-                    ? "opacity-50"
-                    : "hover:opacity-50"
-                }`}
+                className={`my-5 transition-opacity duration-75 ${pathname.includes("/articles") ? "opacity-50" : "hover:opacity-50"}`}
                 onClick={() => setIsNavClicked(false)}
               >
                 Articles
               </Link>
               <Link
-                href="/#about"
-                className="my-3 transition-opacity duration-75 hover:opacity-50"
-                onClick={() => setIsNavClicked(false)}
-              >
-                About
-              </Link>
-              <Link
                 href="/contact"
-                className={`my-3 flex items-center gap-2 transition-opacity duration-75 ${
-                  pathname === "/contact"
-                    ? "opacity-50"
-                    : "hover:opacity-50"
-                }`}
+                className={`my-5 flex items-center gap-2 transition-opacity duration-75 ${pathname === "/contact" ? "opacity-50" : "hover:opacity-50"}`}
                 onClick={() => setIsNavClicked(false)}
               >
                 <span>Book a call</span>
