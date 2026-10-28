@@ -227,7 +227,7 @@ export default function Credentials() {
   };
 
   return (
-    <section id="credentials" className="mt-[120px]">
+    <section id="credentials" className="w-full py-2 lg:py-4">
       {/* Section Header */}
       <div>
         <GradientTxt

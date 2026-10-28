@@ -73,7 +73,7 @@ export default function EducationSect({
   return (
     <section
       id="experience"
-      className="mt-[120px] flex flex-col justify-between gap-16 xl:flex-row xl:gap-10"
+      className="w-full py-4 flex flex-col justify-between gap-10 xl:flex-row xl:gap-10"
     >
       <div className="xl:w-1/2">
         <div className="mb-10 text-[27px] font-bold md:text-[36px]">

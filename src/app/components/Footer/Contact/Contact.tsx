@@ -58,7 +58,7 @@ export default function ContactDetails() {
   ];
 
   return (
-    <section className="pt-[80px] xl:pt-[300px]">
+    <section id="contact" className="w-full py-8 lg:py-12">
       <FadeUp tag="div" className="mb-8">
         <h2 className="text-[36px] font-bold tracking-[0.5px] text-white md:text-[50px] xl:text-[54px]">
           Ready to create something amazing?

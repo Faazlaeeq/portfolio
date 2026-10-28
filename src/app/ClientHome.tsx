@@ -2,13 +2,17 @@
 
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import TechStacks from "./components/TechStacks";
+import Credentials from "./components/HomeComp/Credentials";
 import Services from "./components/HomeComp/Services";
-import OtherComponents from "./components/HomeComp/Other_Comp/OtherComponents";
-import Footer from "./components/Footer/Footer";
 import Projects from "./components/HomeComp/Projects/Projects";
 import AnimatedSlide from "./components/HomeComp/Projects/Swiper";
 import Articles from "./components/HomeComp/Articles";
-import TechStacks from "./components/TechStacks";
+import ProfileInfo from "./components/HomeComp/Other_Comp/comp/profileInfo";
+import EducationSect from "./components/HomeComp/Other_Comp/comp/Education/educationSect";
+import Testimonials from "./components/HomeComp/Other_Comp/comp/Testimonials";
+import Footer from "./components/Footer/Footer";
+
 import type { Services as ServicesType } from "../../types/Services";
 import type { Project } from "../../types/Project";
 import type { Technology } from "../../types/Technology";
@@ -39,25 +43,66 @@ export default function ClientHome({
   return (
     <>
       <Header key="header" />
-      <main key="main">
-        <div className="container mx-auto px-5 pt-5 lg:px-20">
-          <Hero />
+      <main key="main" className="w-full">
+        {/* ROW 1: Hero Section (Dark / Pure Black #000000) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-between bg-black relative">
+          <div className="container mx-auto px-5 pt-8 lg:px-20">
+            <Hero />
+          </div>
+          <div className="w-full pb-4">
+            <TechStacks initialTechStacks={initialTechStacks} />
+          </div>
         </div>
-        <TechStacks initialTechStacks={initialTechStacks} />
-        <div className="container mx-auto px-5 pt-5 lg:px-20">
-          <Services initialServices={initialServices} />
-          <Projects />
+
+        {/* ROW 2: Academic & Certification Section - Appearing right after Hero (Lighter / Charcoal #111111) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-[#111111] relative">
+          <div className="container mx-auto px-5 py-8 lg:px-20">
+            <Credentials />
+          </div>
         </div>
-        <div className="relative h-[400px]">
-          <AnimatedSlide initialProjects={initialProjects} />
+
+        {/* ROW 3: Services & Expertise Section (Dark / Pure Black #000000) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-black relative">
+          <div className="container mx-auto px-5 py-8 lg:px-20">
+            <Services initialServices={initialServices} />
+          </div>
         </div>
-        <Articles initialArticles={initialArticles} />
-        <OtherComponents
-          initialExperiences={initialExperiences}
-          initialTestimonials={initialTestimonials}
-        />
+
+        {/* ROW 4: Featured Projects & Showcase (Lighter / Charcoal #111111) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-[#111111] relative overflow-hidden">
+          <div className="container mx-auto px-5 pt-6 lg:px-20">
+            <Projects />
+          </div>
+          <div className="relative h-[360px] w-full">
+            <AnimatedSlide initialProjects={initialProjects} />
+          </div>
+        </div>
+
+        {/* ROW 5: Articles Section (Dark / Pure Black #000000) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-black relative">
+          <Articles initialArticles={initialArticles} />
+        </div>
+
+        {/* ROW 6: About & Work History Section (Lighter / Charcoal #111111) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-[#111111] relative">
+          <div className="container mx-auto px-5 py-8 lg:px-20">
+            <ProfileInfo />
+            <EducationSect initialExperiences={initialExperiences} />
+          </div>
+        </div>
+
+        {/* ROW 7: Testimonials Section (Dark / Pure Black #000000) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-black relative">
+          <div className="container mx-auto px-5 py-8 lg:px-20">
+            <Testimonials initialTestimonials={initialTestimonials} />
+          </div>
+        </div>
+
+        {/* ROW 8: Contact / Footer Section (Lighter / Charcoal #111111) */}
+        <div className="snap-section min-h-screen w-full flex flex-col justify-center bg-[#111111] relative">
+          <Footer initialFaqs={initialFaqs} />
+        </div>
       </main>
-      <Footer key="footer" initialFaqs={initialFaqs} />
     </>
   );
 }

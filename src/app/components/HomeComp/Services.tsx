@@ -56,7 +56,7 @@ const SERVICES_DATA: ServiceItem[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="mb-[80px]">
+    <section id="services" className="w-full py-2 lg:py-4">
       <FadeUp tag="div" className="mb-16">
         <GradientTxt
           tagName="h6"

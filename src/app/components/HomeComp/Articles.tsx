@@ -59,8 +59,8 @@ export default function Articles({
   }, []);
 
   return (
-    <section className="mb-[80px] bg-black">
-      <div className="container mx-auto flex flex-col items-start justify-between gap-10 px-5 pb-[100px] pt-[300px] md:flex-row md:gap-2 lg:px-20">
+    <section id="articles" className="w-full py-4 lg:py-8 bg-black">
+      <div className="container mx-auto flex flex-col items-start justify-between gap-8 px-5 py-2 md:flex-row md:gap-8 lg:px-20">
         <div
           id="left-content"
           className={`md:sticky ${isBottom ? "md:bottom-0" : "md:top-20"}`}
