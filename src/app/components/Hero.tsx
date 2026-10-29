@@ -1,7 +1,7 @@
 "use client";
 
 import GradientTxt from "./Reusables/GradientTxt";
-import profImg from "../../../public/faaz-profile-circle.png";
+import profImg from "../../../public/faaz-profile-square.jpg";
 import Image from "next/image";
 import Link from "next/link";
 
