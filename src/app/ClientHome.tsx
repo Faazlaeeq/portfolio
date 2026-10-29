@@ -39,7 +39,7 @@ export default function ClientHome({
       <Header key="header" />
       <main key="main">
         {/* 1. Hero Section */}
-        <div className="container mx-auto px-5 pt-5 lg:px-20">
+        <div className="container mx-auto px-5 lg:px-20">
           <Hero />
         </div>
 

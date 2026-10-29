@@ -7,20 +7,20 @@ export default function ContactDetails() {
 
   const navLinks = [
     {
-      name: "Experience",
-      path: "/#experience",
+      name: "Projects",
+      path: "/projects",
     },
     {
       name: "Certifications",
       path: "/#credentials",
     },
     {
-      name: "Education",
-      path: "/#education",
+      name: "Experience",
+      path: "/#experience",
     },
     {
-      name: "Projects",
-      path: "/projects",
+      name: "Education",
+      path: "/#education",
     },
     {
       name: "Contact",
