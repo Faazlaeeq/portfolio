@@ -44,16 +44,13 @@ export default function ClientHome({
         </div>
 
         {/* 2. Projects Section */}
-        <div className="container mx-auto px-5 pt-8 lg:px-20">
+        <div className="container mx-auto px-5 pt-12 lg:px-20">
           <Projects />
         </div>
-        {/* Swiper wrapper with ample clearance to prevent collision with subsequent sections */}
-        <div className="relative min-h-[580px] md:min-h-[620px] pb-10">
-          <AnimatedSlide initialProjects={initialProjects} />
-        </div>
+        <AnimatedSlide initialProjects={initialProjects} />
 
         {/* Tech Stacks Marquee Divider */}
-        <div className="mt-8">
+        <div className="py-6">
           <TechStacks initialTechStacks={initialTechStacks} />
         </div>
 

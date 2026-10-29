@@ -1,7 +1,8 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
+import "swiper/css";
+import "swiper/css/navigation";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
@@ -42,8 +43,8 @@ export default function AnimatedSlide({
   };
 
   return (
-    <>
-      <div className="absolute mt-[100px] w-full cursor-pointer xl:right-0">
+    <div className="relative w-full overflow-hidden pb-12 pt-4">
+      <div className="w-full cursor-pointer">
         <Swiper
           key={projects.length}
           modules={[Autoplay, Navigation]}
@@ -52,54 +53,54 @@ export default function AnimatedSlide({
             300: {
               slidesPerView: 1,
             },
-
-            600: {
+            640: {
               slidesPerView: 2,
             },
-
-            900: {
+            1024: {
               slidesPerView: 3,
             },
-
-            1200: {
+            1280: {
               slidesPerView: 4,
             },
           }}
-          spaceBetween={20}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          spaceBetween={24}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
+          className="w-full px-5 lg:px-20"
         >
           {projects.length > 0 &&
             projects.map((project) => (
               <SwiperSlide
                 key={project._id}
-                className="group md:min-w-[400px]"
+                className="group overflow-hidden rounded-xl border border-neutral-800 bg-[#0a0a0a] transition-all duration-300 hover:border-neutral-700"
                 onClick={() => handleNavigation(project.slug)}
               >
-                <div className="w-full overflow-hidden">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-900">
                   {project.images && project.images[0] && (
                     <Image
                       src={project.images[0].url}
                       alt={project.images[0].alt || project.title}
-                      width={400}
-                      height={350}
+                      fill
                       priority
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.1] md:max-h-[273px]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   )}
                 </div>
-                <div className="bg-[#0a0a0a] p-10">
+                <div className="p-6 md:p-8">
                   <GradientTxt
                     txt={project.title}
-                    className="text-[14px] font-bold tracking-[4px]"
+                    className="text-[13px] font-bold tracking-[3px]"
                     tagName="h5"
                   />
-                  <h4 className="my-6 truncate text-[19px] font-bold leading-[110%] transition-opacity duration-300 group-hover:opacity-50">
-                    {project.slug === "jewelery-register" ? "Custom Gold Refining Lab Software" : project.tagline}
+                  <h4 className="my-4 truncate text-[18px] font-bold leading-snug text-white transition-opacity duration-300 group-hover:opacity-80">
+                    {project.slug === "jewelery-register"
+                      ? "Custom Gold Refining Lab Software"
+                      : project.tagline}
                   </h4>
                   <CustomNav
                     txt="View Project"
-                    className="flex items-center gap-2 text-[14px] transition-opacity duration-300 group-hover:opacity-50"
+                    className="flex items-center gap-2 text-[14px] text-neutral-400 transition-colors duration-300 group-hover:text-white"
                   />
                 </div>
               </SwiperSlide>
@@ -107,17 +108,19 @@ export default function AnimatedSlide({
         </Swiper>
       </div>
 
-      <div className="absolute -bottom-[250px] right-5 ml-auto mt-4 flex items-center gap-4 lg:-bottom-[300px] lg:right-40">
-        <div
-          className="flex size-[60px] cursor-pointer items-center justify-center bg-0a0a0a"
+      {/* Navigation arrows positioned in normal flow below the carousel */}
+      <div className="container mx-auto mt-8 flex items-center justify-end gap-3 px-5 lg:px-20">
+        <button
+          type="button"
+          aria-label="Previous project slide"
+          className="flex size-12 cursor-pointer items-center justify-center rounded-lg border border-neutral-800 bg-[#0a0a0a] text-white transition-colors hover:border-neutral-600 hover:bg-neutral-900"
           onClick={() => swiperRef.current?.slidePrev()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            width="18"
+            height="18"
             fill="currentColor"
-            className="bi bi-chevron-left"
             viewBox="0 0 16 16"
           >
             <path
@@ -125,18 +128,19 @@ export default function AnimatedSlide({
               d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
             />
           </svg>
-        </div>
+        </button>
 
-        <div
-          className="flex size-[60px] cursor-pointer items-center justify-center bg-0a0a0a"
+        <button
+          type="button"
+          aria-label="Next project slide"
+          className="flex size-12 cursor-pointer items-center justify-center rounded-lg border border-neutral-800 bg-[#0a0a0a] text-white transition-colors hover:border-neutral-600 hover:bg-neutral-900"
           onClick={() => swiperRef.current?.slideNext()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            width="18"
+            height="18"
             fill="currentColor"
-            className="bi bi-chevron-right"
             viewBox="0 0 16 16"
           >
             <path
@@ -144,8 +148,8 @@ export default function AnimatedSlide({
               d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
             />
           </svg>
-        </div>
+        </button>
       </div>
-    </>
+    </div>
   );
 }
